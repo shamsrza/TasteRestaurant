@@ -20,8 +20,6 @@ namespace TasteRestaurantAPI.Models
         [Required]
         public string PhoneNumber { get; set; }
 
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
         [Required]
         public int NumberOfGuests { get; set; }
 

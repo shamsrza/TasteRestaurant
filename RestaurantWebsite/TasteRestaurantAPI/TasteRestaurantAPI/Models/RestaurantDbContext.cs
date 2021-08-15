@@ -13,7 +13,15 @@ namespace TasteRestaurantAPI.Models
 
         }
 
-        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>(entity => {
+                entity.HasIndex(e => e.Email).IsUnique();
+            });
+        }
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<OrderMaster> OrderMasters { get; set; }

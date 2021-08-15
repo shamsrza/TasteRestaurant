@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TasteRestaurantAPI.Helpers;
 using TasteRestaurantAPI.Models;
 
 namespace TasteRestaurantAPI
@@ -29,16 +30,19 @@ namespace TasteRestaurantAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //CORS
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:36540/","http://localhost:36540/api/Customer");
-                    });
-            });
+            services.AddCors();
 
-            services.AddControllers().AddNewtonsoftJson();
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddDefaultPolicy(
+            //        builder =>
+            //        {
+            //            builder.WithOrigins("http://localhost:36540/","http://localhost:36540/api/Customer");
+            //        });
+            //});
+
+            //services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TasteRestaurantAPI", Version = "v1" });
@@ -46,6 +50,10 @@ namespace TasteRestaurantAPI
 
             services.AddDbContext<RestaurantDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddControllers();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<JwtService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,8 +69,14 @@ namespace TasteRestaurantAPI
             app.UseHttpsRedirection();
             app.UseRouting();
 
+
             //CORS
-            app.UseCors();
+            app.UseCors(options => options
+                        .WithOrigins(new[] { "http://localhost:3000" })
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+             );
 
             app.UseAuthorization();
 
