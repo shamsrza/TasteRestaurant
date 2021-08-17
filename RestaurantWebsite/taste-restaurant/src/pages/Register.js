@@ -2,17 +2,18 @@
 // import { Link } from 'react-router-dom' 
 // import {useHistory} from 'react-router-dom'
 // //import { BrowserRouter as Router } from 'react-router-dom';
-// import axios from "axios"
+//  import axios from "axios"
+//  import history from "react-bootstrap"
 
 // function Register(props){
 
-//   const [customerName, setCustomerName] = useState("")
-//   const [email, setEmail] = useState("")
-//   const [password, setPassword] = useState("")
+  //  const [name, setName] = useState("")
+  //  const [email, setEmail] = useState("")
+  //  const [password, setPassword] = useState("")
 //   const [confirmPassword, setConfirmPassword] = useState("")
 //   const [address, setAddress] = useState("")
 //   const [phoneNumber, setPhoneNumber] = useState("")
-//   const history = useHistory();
+ //  const history = useHistory();
 
 
 //   async function signUp()
@@ -93,8 +94,7 @@
 //     export default Register;
 
 
-import React, { SyntheticEvent, useState} from 'react'  
-//import { Form } from 'react-bootstrap';
+import React, { useState} from 'react'  
 import { Redirect } from 'react-router-dom'; 
 
 
@@ -137,7 +137,7 @@ const Register = () =>{
 
       <input type="password" className="form-control" placeholder="Password" required onChange={e => setPassword(e.target.value)}/>
      
-     <button className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+     <button type="submit" className="w-100 btn btn-lg btn-primary">Submit</button>
   </form>
   );
 };

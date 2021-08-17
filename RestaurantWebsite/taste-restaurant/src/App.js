@@ -22,7 +22,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
     useEffect(() => {
         (
             async() =>{
@@ -40,10 +40,10 @@ function App() {
   return (
     <>
       <Router>
-      <Navbar name ={name}/>  
-      <Route path="/" exact component={()=> <Home name = {name} />}/>
+      <Navbar name = {name} setName={setName}/>  
+      <Route path="/" exact component={()=> <Home name={name} />}/>
       <main class="form-signin">
-        <Route path="/login" component={Login}/>
+        <Route path="/login" component={()=> <Login setName={setName}/>}/>
         <Route path="/register" component={Register}/>
       </main>
       </Router>

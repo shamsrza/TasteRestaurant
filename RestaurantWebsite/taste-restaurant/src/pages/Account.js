@@ -1,4 +1,4 @@
-//import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import about from "../img/about.jpg"
 import port1 from "../img/portfolio/01-small.jpg"
 import port2 from "../img/portfolio/02-small.jpg"
@@ -16,14 +16,29 @@ import port12 from "../img/portfolio/12-small.jpg"
 // import Home from "./pages/Home" 
 // import Register from "./pages/Register"
 //import Navbar from "../components/Navbar"
+//import Reservation from "../components/Reservation"
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-const Home = (props) => {
+const Account = (props) => {
+    const [name, setName] = useState("");
+    useEffect(() => {
+        (
+            async() =>{
+               const response = await fetch ("http://localhost:36540/api/user", {
+                    headers: {"Content-Type": "application/json"},
+                    credentials: 'include'
+                });
 
+                const content = await response.json();
+                setName(content.name)
+            }
+        )();
+    })
 
+//burda userin nameni goturmek ucun props.name
 return ( 
-<div>  
-   <header id="header">
+<>
+      <header id="header">
         <div className="intro">
           <div className="overlay">
             <div className="container">
@@ -513,6 +528,9 @@ return (
           </div>
         </div>
       </div>
+          
+    {/* Reservation */}
+
       {/* <!-- Order Section --> */}
       <div id="order" className="text-center">
         <div className="container">
@@ -548,20 +566,20 @@ return (
             <ul style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
             <Router>
               <li style={{padding: '0 10px', fontSize: "20px"}}>
-              <a href= "https://www.facebook.com/">
+              <Link to="https://www.facebook.com/">
               <i className="fab fa-facebook-f"></i>
-              </a>
+              </Link>
               </li>
               
               <li style={{padding: '0 10px', fontSize: "20px"}}>
-              <a href= "https://www.twitter.com/">
+              <Link to= "https://www.twitter.com/">
               <i className="fab fa-twitter"></i>
-              </a>  
+              </Link>  
               </li>
               <li style={{padding: '0 10px', fontSize: "20px"}}>
-              <a href= "https://www.gmail.com/">
+              <Link to= "https://www.gmail.com/">
               <i className="fab fa-google-plus-g"></i>
-              </a>
+              </Link>
               </li>
               </Router>
             </ul>
@@ -571,8 +589,9 @@ return (
           </div>
         </div>
       </div>
-  </div>
+      </>
+     
   )
 }  
   
-export default Home;  
+export default Account;

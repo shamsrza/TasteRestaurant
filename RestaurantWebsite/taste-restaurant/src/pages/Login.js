@@ -1,31 +1,41 @@
 import React, { useState} from 'react'  
 import { Redirect } from 'react-router-dom'; 
+//import Account from "./Account"
+//import {} from 'bootstrap/dist/css/bootstrap.css';
 
-
-const Login = () =>{
+const Login = (props) =>{
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [redirect, setRedirect] = useState(false);
 
+  const pname = props.name;
+
+  const setName = ({ pname }) => props.name;
+
   const submit = async (e) =>
   {
-    e.preventDefault();
-    await fetch ("http://localhost:36540/api/login", {
+      e.preventDefault();
+      const response =  await fetch ("http://localhost:36540/api/login", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      credentials: 'include',
+      credentials: 'include',   //for cookies
       body: JSON.stringify({
         email,
         password
       })
+      
     });
 
-    setRedirect(true);
+    const content = await response.json();
 
+    setRedirect(true);
+    props.setName(content.name);
   }
+
   if(redirect){
     return <Redirect to = "/" />
+
   }
 
   return ( 
@@ -36,7 +46,7 @@ const Login = () =>{
 
       <input type="password" className="form-control" placeholder="Password" required onChange={e => setPassword(e.target.value)} />
      
-     <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+     <button type="submit" className="w-100 btn btn-lg btn-primary" >Sign in</button>
   </form>
   );
 };
