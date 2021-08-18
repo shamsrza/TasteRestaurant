@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'  
+import React, { useState} from 'react'  
 import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
 //  import Login from "../pages/Login"  
 //  import Register from "../pages/Register"
@@ -6,50 +6,24 @@ import history from '../history';
 
 
 
-const Navbar = (props) =>{
+const Navbar = (props) => {
 
-const logout = async ()=> {
-    await fetch ("http://localhost:36540/api/logout", {
+const pname = props.name;
+const setName = ({ pname}) => console.log(props.name);
+const [clicked, setClicked] = useState(false);
+  
+const handleLogout = async ()=> {
+    await fetch ("http://localhost:36540/api/auth/logout", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       credentials: 'include'
     });
 
-    setName({pname})
-    {
-      console.log("");
-    }
-  }
+    props.setName(" ");
 
-let menu;
-// let options;
+    history.push('/login')
 
-if(props.name === "")
-{
-  menu = (
-      <div className="dropdown-content">
-        <ul>
-          <li><a href="" className="page-scroll" onClick={() => history.push('/login')}>Login</a></li>
-          <li><a href="" className="page-scroll" onClick={() => history.push('/register')}>Sign Up</a></li>
-        </ul>
-      </div>
-  )
 }
-else
-{
-  menu = (
-  <div className="dropdown-content">
-    <ul><li><a href="" className="page-scroll" onClick={logout} onClick={() => history.push('/')}>Logout</a></li></ul>
-  </div>
-)
-}
-
-const [clicked, setClicked] = useState(false);
-
-const pname = props.name;
-
-const setName = ({ pname }) => console.log(props.name);
-
 
 const handleTaste = () =>{
   <Redirect to = "/" />
@@ -59,6 +33,20 @@ const handleClick = () =>{
   setClicked(!clicked)
 }
 
+const menu1 = (
+<ul>
+  <li><Link to="/login" className="page-scroll" onClick={() => history.push('/login')}>Login</Link></li>
+  <li><Link to="/register" className="page-scroll" onClick={() => history.push('/register')}>Sign Up</Link></li>
+</ul>
+)
+
+const menu2 = (
+  <ul>
+    <li>
+      <Link to="/" className="page-scroll" onClick={handleLogout}>Logout</Link>
+    </li>
+  </ul>
+)
 
 // if(props.name === ""){
 //   options = (
@@ -96,7 +84,9 @@ const handleClick = () =>{
               <li><a href="#order" className="page-scroll nav-links">Make An Order</a></li>
               <li className="dropdown">
               <Link to="" className="page-scroll">{props.name ? props.name : "Account"}</Link>
-                 {menu}
+                <div className="dropdown-content">
+                { props.name !== null ? menu2 : menu1 }
+                </div>
              </li>
             </ul>
           </div>
@@ -115,7 +105,9 @@ const handleClick = () =>{
               {/* {options} */}
               <li className="dropdown">
               <Link to="" className="page-scroll">{props.name ? props.name : "Account"}</Link>
-                {menu}
+              <div className="dropdown-content">
+              { props.name !== null ? menu2 : menu1 }
+              </div>
              </li>
             </Router>
             </ul>

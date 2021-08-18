@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 
 function Reservation(){
 
@@ -132,10 +132,9 @@ return (
               <fieldset>
                 <textarea
                   name="message"
-                  rows="3"
                   id="message"
                   placeholder="Message"
-                  required=""
+                  style={{ height: "70px"}}
                 ></textarea>
               </fieldset>
             </div>

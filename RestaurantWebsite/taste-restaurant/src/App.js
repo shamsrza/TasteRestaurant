@@ -13,11 +13,12 @@ import React, {useEffect, useState} from 'react'
 // import port10 from "./img/portfolio/10-small.jpg"
 // import port11 from "./img/portfolio/11-small.jpg"
 // import port12 from "./img/portfolio/12-small.jpg"
+import Reservation from "./pages/Reservation"  
 import Login from "./pages/Login"  
 import Home from "./pages/Home" 
 import Register from "./pages/Register"
 import Navbar from "./components/Navbar"
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import history from './history'
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
     useEffect(() => {
         (
             async() =>{
-               const response = await fetch ("http://localhost:36540/api/user", {
+               const response = await fetch ("http://localhost:36540/api/auth/user", {
                     headers: {"Content-Type": "application/json"},
                     credentials: 'include'
                 });
@@ -42,7 +43,8 @@ function App() {
       <Router>
       <Navbar name = {name} setName={setName}/>  
       <Route path="/" exact component={()=> <Home name={name} />}/>
-      <main class="form-signin">
+      <Route path="/reservation" component={Reservation}/>
+      <main className="form-signin">
         <Route path="/login" component={()=> <Login setName={setName}/>}/>
         <Route path="/register" component={Register}/>
       </main>
