@@ -9,7 +9,7 @@ using TasteRestaurantAPI.Models;
 namespace TasteRestaurantAPI.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    [Migration("20210815221205_Init")]
+    [Migration("20210822201334_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,7 +82,12 @@ namespace TasteRestaurantAPI.Migrations
                     b.Property<string>("PMethod")
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("OrderMasterId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("OrderMasters");
                 });
@@ -115,14 +120,19 @@ namespace TasteRestaurantAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("ReservationId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("TasteRestaurantAPI.Models.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -136,7 +146,7 @@ namespace TasteRestaurantAPI.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("Email")
                         .IsUnique()
@@ -160,6 +170,28 @@ namespace TasteRestaurantAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("FoodItem");
+                });
+
+            modelBuilder.Entity("TasteRestaurantAPI.Models.OrderMaster", b =>
+                {
+                    b.HasOne("TasteRestaurantAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TasteRestaurantAPI.Models.Reservation", b =>
+                {
+                    b.HasOne("TasteRestaurantAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TasteRestaurantAPI.Models.OrderMaster", b =>

@@ -22,6 +22,7 @@ namespace TasteRestaurantAPI.Models
                 entity.HasIndex(e => e.Email).IsUnique();
             });
         }
+
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<OrderMaster> OrderMasters { get; set; }

@@ -24,13 +24,31 @@ namespace TasteRestaurantAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderMaster>>> GetOrderMasters()
         {
-            return await _context.OrderMasters.ToListAsync();
+            return await _context.OrderMasters.Include(x => x.User).ToListAsync();
         }
 
         // GET: api/Order/5
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderMaster>> GetOrderMaster(long id)
         {
+            //get fooditem from order details
+            var orderDetails = await (from master in _context.Set<OrderMaster>()
+                                      join detail in _context.Set<OrderDetail>()
+                                      on master.OrderMasterId equals detail.OrderMasterId
+                                      join foodItem in _context.Set<FoodItem>()
+                                      on detail.FoodItemId equals foodItem.FoodItemId
+                                      where master.OrderMasterId == id
+
+                                      select new
+                                      {
+                                          master.OrderMasterId,
+                                          detail.OrderDetailId,
+                                          detail.FoodItemId,
+                                          detail.Quantity,
+                                          detail.FoodItemPrice,
+                                          foodItem.FoodItemName
+                                      }).ToListAsync();
+
             var orderMaster = await _context.OrderMasters.FindAsync(id);
 
             if (orderMaster == null)
@@ -52,6 +70,23 @@ namespace TasteRestaurantAPI.Controllers
             }
 
             _context.Entry(orderMaster).State = EntityState.Modified;
+
+            //existing food items & newly added food items
+            foreach (OrderDetail item in orderMaster.OrderDetails)
+            {
+                if (item.OrderDetailId == 0)
+                    _context.OrderDetails.Add(item);
+                else
+                    _context.Entry(item).State = EntityState.Modified;
+            }
+
+            //deleted food items
+            foreach (var i in orderMaster.DeletedOrderItemIds.Split(',').Where(x => x != ""))
+            {
+                OrderDetail y = _context.OrderDetails.Find(Convert.ToInt64(i));
+                _context.OrderDetails.Remove(y);
+            }
+
 
             try
             {

@@ -15,7 +15,7 @@ namespace TasteRestaurantAPI.Models
         public User Create(User user)
         {
             _context.Users.Add(user);
-            user.Id = _context.SaveChanges();
+            user.UserId = _context.SaveChanges();
 
             return user;
         }
@@ -27,7 +27,7 @@ namespace TasteRestaurantAPI.Models
 
         public User GetById(int id)
         {
-            return _context.Users.FirstOrDefault(u => u.Id == id);
+            return _context.Users.FirstOrDefault(u => u.UserId == id);
 
         }
     }

@@ -11,7 +11,7 @@ using TasteRestaurantAPI.Models;
 
 namespace TasteRestaurantAPI.Controllers
 {
-    [Route("api")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : Controller
     {
@@ -44,15 +44,14 @@ namespace TasteRestaurantAPI.Controllers
             var user = _repository.GetByEmail(dto.Email);
 
             if(user == null)
-                return BadRequest(new { message= "Invalid Credentials" });
+                return BadRequest(new { message = "Invalid Credentials" });
 
             if(!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
                 return BadRequest(new { message = "Invalid Credentials" });
 
-            var jwt = _jwtService.Generate(user.Id);
+            var jwt = _jwtService.Generate(user.UserId);
 
-            Response.Cookies.Append("jwt", jwt, new CookieOptions
-            {
+            Response.Cookies.Append("jwt", jwt, new CookieOptions{
                 HttpOnly = true
             });
 
@@ -88,10 +87,7 @@ namespace TasteRestaurantAPI.Controllers
         {
             Response.Cookies.Delete("jwt");
 
-            return Ok(new
-            {
-                message = "success"
-            });
+            return Ok(new {message = "success"});
         }
     }
 }

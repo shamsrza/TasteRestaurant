@@ -1,9 +1,16 @@
 import React from 'react'
 import {Link } from 'react-router-dom';
+import Input from "../controls/Input";
 
 function Reservation(){
 
-    
+  // const [name, setName] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [redirect, setRedirect] = useState(false);
+
+  const generateOrderNumber = () => Math.floor(100000 + Math.random() * 900000).toString();
+
 return (
 
 <div id="team" className="text-center">
@@ -76,6 +83,7 @@ return (
                   id="email"
                   pattern="[^ @]*@[^ @]*"
                   placeholder="Reservation Number"
+                  value= {generateOrderNumber}
                   required=""
                 />
               </fieldset>

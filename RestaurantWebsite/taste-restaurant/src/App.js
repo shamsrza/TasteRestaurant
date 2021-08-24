@@ -17,6 +17,7 @@ import Reservation from "./pages/Reservation"
 import Login from "./pages/Login"  
 import Home from "./pages/Home" 
 import Register from "./pages/Register"
+import MakeOrder from "./pages/MakeOrder"
 import Navbar from "./components/Navbar"
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import history from './history'
@@ -44,6 +45,7 @@ function App() {
       <Navbar name = {name} setName={setName}/>  
       <Route path="/" exact component={()=> <Home name={name} />}/>
       <Route path="/reservation" component={Reservation}/>
+      <Route path="/makeorder" component={MakeOrder}/>
       <main className="form-signin">
         <Route path="/login" component={()=> <Login setName={setName}/>}/>
         <Route path="/register" component={Register}/>

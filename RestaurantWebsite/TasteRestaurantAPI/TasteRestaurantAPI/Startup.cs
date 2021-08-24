@@ -32,17 +32,6 @@ namespace TasteRestaurantAPI
             //CORS
             services.AddCors();
 
-
-            //services.AddCors(options =>
-            //{
-            //    options.AddDefaultPolicy(
-            //        builder =>
-            //        {
-            //            builder.WithOrigins("http://localhost:36540/","http://localhost:36540/api/Customer");
-            //        });
-            //});
-
-            //services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TasteRestaurantAPI", Version = "v1" });

@@ -495,7 +495,7 @@ ol.type li a:hover {
 	background: #444 url(../img/team-bg.jpg) no-repeat center center fixed;
 	background-size: cover;
 	min-height: 100vh;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 #team .overlay {
 
