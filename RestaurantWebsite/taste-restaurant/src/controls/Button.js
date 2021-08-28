@@ -5,7 +5,8 @@ const useStyles = makeStyles(theme => ({
     root: {
         margin: theme.spacing(1),
         '& .MuiButton-label': {
-            textTransform: 'none'
+            textTransform: 'none',
+            fontSize: '15px'
         }
     }
 }))

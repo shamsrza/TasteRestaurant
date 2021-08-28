@@ -513,18 +513,6 @@ return (
           </div>
         </div>
       </div>
-      {/* <!-- Order Section --> */}
-      <div id="order" className="text-center">
-        <div className="container">
-          <div className="section-title text-center">
-            <h2>Make an Order</h2>
-            <hr />
-            <p>
-              Before setting order please make sure that you signed in.
-            </p>
-          </div>
-        </div>
-      </div>
   
       {/* <!-- Footer --> */}
       <div id="footer">

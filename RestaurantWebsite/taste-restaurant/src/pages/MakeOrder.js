@@ -9,7 +9,8 @@ export default function MakeOrder() {
             <Typography
             gutterBottom
             variant= "h2"
-            align = "center">
+            align = "center"
+            style= {{marginBottom: "70px"}}>
             Make an Order
             </Typography>
 

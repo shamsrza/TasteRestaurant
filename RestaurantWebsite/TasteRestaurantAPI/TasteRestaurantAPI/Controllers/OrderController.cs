@@ -24,7 +24,7 @@ namespace TasteRestaurantAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderMaster>>> GetOrderMasters()
         {
-            return await _context.OrderMasters.Include(x => x.User).ToListAsync();
+            return await _context.OrderMasters./*Include(x => x.User).*/ToListAsync();
         }
 
         // GET: api/Order/5

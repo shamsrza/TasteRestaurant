@@ -2,7 +2,7 @@ import React from 'react'
 import {Link } from 'react-router-dom';
 import Input from "../controls/Input";
 
-function Reservation(){
+function Reservation(props){
 
   // const [name, setName] = useState("");
   // const [password, setPassword] = useState("");

@@ -13,12 +13,13 @@ namespace TasteRestaurantAPI.Models
         public long OrderMasterId  { get; set; }
         [Column(TypeName = "nvarchar(75)")]
         public string OrderNumber  { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
 
         [Column(TypeName = "nvarchar(10)")]
         public string PMethod { get; set; }
         public decimal GTotal { get; set; }
+
+        [Column(TypeName = "nvarchar(100)")]
+        public string Address { get; set; }
 
         public List<OrderDetail> OrderDetails { get; set; }
 
