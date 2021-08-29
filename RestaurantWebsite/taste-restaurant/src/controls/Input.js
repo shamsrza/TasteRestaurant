@@ -1,5 +1,5 @@
-import React from 'react'
-import { TextField , makeStyles, InputLabel } from '@material-ui/core';
+import React, {useState} from 'react'
+import { TextField , makeStyles, InputLabel, FormHelperText } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,21 +12,26 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+
 export default function Input(props) {
     const classes = useStyles();
+    //const [values, setValues] = useState('');
 
     const { name, label, value, variant, onChange, error = null, ...other } = props;
+
+    
     return (
         <TextField
-        className={classes.root}
-            inputProps={{style: {fontSize: 15}}}
+            className={classes.root}
+            inputProps={{style: {fontSize: "15px"}}}
             variant={variant || "outlined"}
             label={label}
             name={name}
             value={value}
             onChange={onChange}
+            //onChange={(e) =>{setAddressValue(e.target.value)}}
             {...other}
-            {...(error && { error: true, helperText: error })}
+            {...(error && { error: true, helperText: <div style={{fontSize: '13px'}}>{error}</div> })}
         />
     )
 }

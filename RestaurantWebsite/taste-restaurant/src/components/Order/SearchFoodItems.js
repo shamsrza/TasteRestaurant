@@ -1,25 +1,28 @@
 import React, {useState, useEffect} from 'react'
 import { createAPIEndpoint, ENDPOINTS } from '../../api';
-import { InputBase, List, ListItem, ListItemText, Paper, IconButton, makeStyles, ListItemSecondaryAction } from '@material-ui/core';
+import { InputBase, List, ListItem, ListItemText, Paper, IconButton, makeStyles, ListItemSecondaryAction, Typography } from '@material-ui/core';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import PlusOneIcon from '@material-ui/icons/PlusOne';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 
+
 const useStyles = makeStyles(theme => ({
     searchPaper: {
+        marginTop: '25px',
         padding: '2px 4px',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     searchInput: {
         marginLeft: theme.spacing(1.5),
         flex: 1,
+        fontSize: '1.2em'
     },
     listRoot: {
         marginTop: theme.spacing(1),
         maxHeight: 450,
-        overflow: 'auto',
+        overflow: 'auto',        
         '& li:hover': {
             cursor: 'pointer',
             backgroundColor: '#E3E3E3'
@@ -34,15 +37,16 @@ const useStyles = makeStyles(theme => ({
         '& .MuiButtonBase-root:hover': {
             backgroundColor: 'transparent'
         }
+    },
+    listItem:{
+        fontSize: '20px',
     }
 }))
 
 export default function SearchFoodItems(props) {
 
-    // const { values, setValues } = props;
-    // let orderedFoodItems = values.orderDetails;
-
-    const {addFoodItem} = props;
+    const { values, setValues } = props;
+    let orderedFoodItems = values.orderDetails;
 
      const [foodItems, setFoodItems] = useState([]);
      const [searchList, setSearchList] = useState([]);
@@ -62,11 +66,26 @@ export default function SearchFoodItems(props) {
     useEffect(() => {
         let x = [...foodItems];
         x = x.filter(y => {
-            return y.foodItemName.toLowerCase().includes(searchKey.toLocaleLowerCase())
-    //             && orderedFoodItems.every(item => item.foodItemId != y.foodItemId)
+            return y.foodItemName.toLowerCase().includes(searchKey.toLocaleLowerCase()) && orderedFoodItems.every(item => item.foodItemId != y.foodItemId)
         });
         setSearchList(x);
-    }, [searchKey])
+    }, [searchKey, orderedFoodItems])
+
+
+    const addFoodItem = foodItem => {
+        let x = {
+            orderMasterId: values.orderMasterId,
+            orderDetailId: 0,
+            foodItemId: foodItem.foodItemId,
+            quantity: 1,
+            foodItemPrice: foodItem.price,
+            foodItemName: foodItem.foodItemName
+        }
+        setValues({
+            ...values,
+            orderDetails: [...values.orderDetails, x]
+        })
+    }
 
     
     return (
@@ -85,14 +104,17 @@ export default function SearchFoodItems(props) {
         <List className = {classes.listRoot}>
             {
                 searchList.map((item, idx)=>
-                <ListItem key={idx}>
+                <ListItem
+                key={idx}
+                onClick = {e => addFoodItem(item)}
+                >
                     <ListItemText
-                    primary = {item.foodItemName}
-                    secondary = {"$" + item.price} />
+                primary = {<Typography style={{fontSize: '1.2em'}}>{item.foodItemName}</Typography>}
+                secondary = {<Typography style={{fontSize: '1.2em'}}>{"$" + item.price}</Typography>} />
                     <ListItemSecondaryAction>
                         <IconButton onClick = {e => addFoodItem(item)}>
-                            <PlusOneIcon />
-                            <ArrowForwardIosIcon />
+                            <PlusOneIcon className ={classes.listItem}/>
+                            <ArrowForwardIosIcon className ={classes.listItem}/>
                         </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>

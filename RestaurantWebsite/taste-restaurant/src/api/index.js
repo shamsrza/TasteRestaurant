@@ -3,7 +3,7 @@ import axios from 'axios'
 const BASE_URL = 'http://localhost:36540/api/';
 
 export const ENDPOINTS = {
-    //CUSTOMER: 'Customer',
+    //ADDRESS: 'Address',
     FOODITEM: 'FoodItem',
     ORDER: 'Order'
 }

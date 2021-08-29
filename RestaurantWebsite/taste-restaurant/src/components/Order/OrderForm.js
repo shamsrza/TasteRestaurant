@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Form from "../../layouts/Form"
-import {Grid, InputAdornment, makeStyles, ButtonGroup, Button as MuiButton} from "@material-ui/core";
+import {Grid, InputAdornment, makeStyles, ButtonGroup, Button as MuiButton, FormHelperText} from "@material-ui/core";
 import {Input, Select, Button} from "../../controls";
 import ReplayIcon from '@material-ui/icons/Replay';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import ReorderIcon from '@material-ui/icons/Reorder';
+import {roundTo2DecimalPoint} from '../../utils'
 import {createAPIEndpoint, ENDPOINTS} from '../../api'
 
 const useStyles = makeStyles(theme=>({
@@ -28,6 +29,7 @@ const useStyles = makeStyles(theme=>({
             backgroundColor: '#85bb65'
         }
     }
+    
 }))
 
 const pMethods = [
@@ -38,11 +40,48 @@ const pMethods = [
 
 export default function OrderForm(props) {
 
-    const {values, errors, handleInputChange} = props;
+    const {values, setValues, errors, setErrors, handleInputChange, resetFormControls} = props;
     const classes = useStyles();
+    const [addressInput, setAddressInput] = useState("");
+
+
+
+    useEffect(() => {
+        let gTotal = values.orderDetails.reduce((tempTotal, item) => {
+            return tempTotal + (item.quantity * item.foodItemPrice);
+        }, 0);
+        setValues({
+            ...values,
+            gTotal: roundTo2DecimalPoint(gTotal)
+        })
+
+    }, [JSON.stringify(values.orderDetails)]);
+
+
+    const validateForm = () => {
+        let temp = {};
+        temp.address = values.address.value != "" ? "" : "This field is required.";
+        temp.pMethod = values.pMethod != "none" ? "" : "This field is required.";
+        temp.orderDetails = values.orderDetails.length != 0 ? "" : "This field is required.";
+        setErrors({...temp});
+        return Object.values(temp).every(x => x === "");
+    }
+
+    const submitOrder = e => {
+        e.preventDefault();
+        if(validateForm()){
+            createAPIEndpoint(ENDPOINTS.ORDER).create(values)
+            .then(res => {
+                resetFormControls();
+            })
+            .catch(err => console.log(err));
+        }
+    }
+
+    values.address = addressInput;
 
     return (
-       <Form style= {{fontSize: "20px"}}>
+       <Form onSubmit={submitOrder} style= {{fontSize: "20px"}}>
            <Grid container>
              <Grid item xs ={6}>
                  <Input
@@ -59,7 +98,9 @@ export default function OrderForm(props) {
                 <Input
                  label = "Address"
                  name = "address"
-                 //value = {values.}
+                 value = {values.address}
+                 error = {errors.address}
+                 onChange={e => setAddressInput(e.target.value)}
                  />
             </Grid>
              <Grid item xs ={6}>
@@ -80,6 +121,7 @@ export default function OrderForm(props) {
                  value = {values.pMethod}
                  onChange = {handleInputChange}
                  options = {pMethods}
+                 error = {errors.pMethod}
                  />
                  <ButtonGroup className = {classes.submitButtonGroup}>
                      <MuiButton

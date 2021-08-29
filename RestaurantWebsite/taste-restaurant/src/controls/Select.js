@@ -10,7 +10,7 @@ import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText,
             fontWeight: 700
           },
           '& .MuiSelect-root': {
-            fontSize: '15px ',
+            fontSize: '15px',
           }
     }
 }))
@@ -25,7 +25,7 @@ export default function Select(props) {
     return (
         <FormControl
             className={classes.root}
-            inputProps={{style: {fontSize: 15}}}
+           // inputProps={{style: {fontSize: '1em'}}}
             variant={varient || "outlined"}
             {...(error && { error: true })}>
             <InputLabel>{label}</InputLabel>
@@ -36,11 +36,11 @@ export default function Select(props) {
                 onChange={onChange}>
                 {
                     options.map(
-                        item => (<MenuItem key={item.id} value={item.id}>{item.title}</MenuItem>)
+                        item => (<MenuItem key={item.id} value={item.id} style={{fontSize: '1em'}}>{item.title}</MenuItem>)
                     )
                 }
             </MuiSelect>
-            {error && <FormHelperText>{error}</FormHelperText>}
+            {error && <FormHelperText style= {{fontSize: '13px'}}>{error}</FormHelperText>}
         </FormControl>
     )
 }
