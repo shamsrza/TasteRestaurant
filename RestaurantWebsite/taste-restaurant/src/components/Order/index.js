@@ -14,7 +14,7 @@ const getFreshModelObject = ()=>({
     pMethod: "none",
     gTotal: 0,
     deletedOrderItemIds:'',
-    address: '',
+    address: " ",
     orderDetails: []
 });
 

@@ -7,6 +7,7 @@ import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import ReorderIcon from '@material-ui/icons/Reorder';
 import {roundTo2DecimalPoint} from '../../utils'
 import {createAPIEndpoint, ENDPOINTS} from '../../api'
+import Popup from "../../layouts/Popup"
 
 const useStyles = makeStyles(theme=>({
     adornmentText: {
@@ -43,6 +44,7 @@ export default function OrderForm(props) {
     const {values, setValues, errors, setErrors, handleInputChange, resetFormControls} = props;
     const classes = useStyles();
     const [addressInput, setAddressInput] = useState("");
+    const [orderListVisibility, setOrderListVisibility] = useState(false);
 
 
 
@@ -60,7 +62,7 @@ export default function OrderForm(props) {
 
     const validateForm = () => {
         let temp = {};
-        temp.address = values.address.value != "" ? "" : "This field is required.";
+        temp.address = values.address != "" ? "" : "This field is required.";
         temp.pMethod = values.pMethod != "none" ? "" : "This field is required.";
         temp.orderDetails = values.orderDetails.length != 0 ? "" : "This field is required.";
         setErrors({...temp});
@@ -81,6 +83,7 @@ export default function OrderForm(props) {
     values.address = addressInput;
 
     return (
+        <>
        <Form onSubmit={submitOrder} style= {{fontSize: "20px"}}>
            <Grid container>
              <Grid item xs ={6}>
@@ -139,5 +142,12 @@ export default function OrderForm(props) {
              </Grid> 
            </Grid>
        </Form>
+       <Popup
+       title="List of Orders"
+       openPopup={orderListVisibility}
+       setOpenPopup={setOrderListVisibility}>
+
+        </Popup>
+    </>
     )
 }
