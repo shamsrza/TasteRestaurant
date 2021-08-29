@@ -8,6 +8,7 @@ import ReorderIcon from '@material-ui/icons/Reorder';
 import {roundTo2DecimalPoint} from '../../utils'
 import {createAPIEndpoint, ENDPOINTS} from '../../api'
 import Popup from "../../layouts/Popup"
+import OrderList from "../../components/Order/OrderList"
 
 const useStyles = makeStyles(theme=>({
     adornmentText: {
@@ -82,6 +83,11 @@ export default function OrderForm(props) {
 
     values.address = addressInput;
 
+
+    const openListOfOrders = () => {
+        setOrderListVisibility(true);
+    }
+
     return (
         <>
        <Form onSubmit={submitOrder} style= {{fontSize: "20px"}}>
@@ -138,15 +144,16 @@ export default function OrderForm(props) {
                  </ButtonGroup>
                  <Button
                  size = "large"
+                 onClick = {openListOfOrders}
                  startIcon = {<ReorderIcon />}>ORDERS</Button>
              </Grid> 
            </Grid>
        </Form>
        <Popup
-       title="List of Orders"
+       title={<div style={{textAlign: "center", fontSize: "1.5em"}}>List of Orders</div>}
        openPopup={orderListVisibility}
        setOpenPopup={setOrderListVisibility}>
-
+           <OrderList/>
         </Popup>
     </>
     )
