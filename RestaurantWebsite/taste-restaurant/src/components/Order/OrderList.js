@@ -46,8 +46,7 @@ export default function OrderList(props) {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {
-                    orderList.map(item => (
+                {orderList.map(item => (
                         <TableRow key={item.orderMasterId}>
                             <TableCell
                                 style={{fontSize: "1em", fontWeight: "700"}}

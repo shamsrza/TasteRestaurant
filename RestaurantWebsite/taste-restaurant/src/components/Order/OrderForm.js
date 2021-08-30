@@ -9,6 +9,7 @@ import {roundTo2DecimalPoint} from '../../utils'
 import {createAPIEndpoint, ENDPOINTS} from '../../api'
 import Popup from "../../layouts/Popup"
 import OrderList from "../../components/Order/OrderList"
+import Notification from "../../layouts/Notification"
 
 const useStyles = makeStyles(theme=>({
     adornmentText: {
@@ -46,6 +47,8 @@ export default function OrderForm(props) {
     const classes = useStyles();
     const [addressInput, setAddressInput] = useState("");
     const [orderListVisibility, setOrderListVisibility] = useState(false);
+    const [orderId, setOrderId] = useState(0);
+    const [notify, setNotify] = useState({isOpen: false})
 
 
 
@@ -61,6 +64,22 @@ export default function OrderForm(props) {
     }, [JSON.stringify(values.orderDetails)]);
 
 
+    useEffect(() => {
+        if (orderId == 0){
+
+            resetFormControls()
+        }
+        else {
+            createAPIEndpoint(ENDPOINTS.ORDER).fetchById(orderId)
+                .then(res => {
+                    setValues(res.data);
+                    setErrors({});
+                })
+                .catch(err => console.log(err))
+        }
+    }, [orderId]);
+
+
     const validateForm = () => {
         let temp = {};
         temp.address = values.address != "" ? "" : "This field is required.";
@@ -70,14 +89,32 @@ export default function OrderForm(props) {
         return Object.values(temp).every(x => x === "");
     }
 
+    const resetForm = () => {
+        resetFormControls();
+        setOrderId(0);
+    }
+
     const submitOrder = e => {
         e.preventDefault();
         if(validateForm()){
+            if(values.orderMasterId == 0){
             createAPIEndpoint(ENDPOINTS.ORDER).create(values)
             .then(res => {
                 resetFormControls();
+                setNotify({isOpen: true, message: "New order is created."})
+            })
+            .catch(err => console.log(err)); 
+            }
+            else{
+                createAPIEndpoint(ENDPOINTS.ORDER).update(values.orderMasterId, values)
+            .then(res => {
+                setOrderId(0);
+                setNotify({isOpen: true, message: "The order is updated."})
             })
             .catch(err => console.log(err));
+
+            }
+            
         }
     }
 
@@ -139,6 +176,7 @@ export default function OrderForm(props) {
                      type="submit">SUBMIT</MuiButton>
                      <MuiButton
                      size="large"
+                     onClick= {resetForm}
                      startIcon = {<ReplayIcon />}
                      />
                  </ButtonGroup>
@@ -153,8 +191,11 @@ export default function OrderForm(props) {
        title={<div style={{textAlign: "center", fontSize: "1.5em"}}>List of Orders</div>}
        openPopup={orderListVisibility}
        setOpenPopup={setOrderListVisibility}>
-           <OrderList/>
+           <OrderList
+           {...{setOrderId, setOrderListVisibility,resetFormControls,setNotify}}/>
         </Popup>
+        <Notification
+                {...{ notify, setNotify }} />
     </>
     )
 }
