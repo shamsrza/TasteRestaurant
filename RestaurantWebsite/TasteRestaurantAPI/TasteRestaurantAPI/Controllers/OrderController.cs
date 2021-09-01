@@ -24,7 +24,7 @@ namespace TasteRestaurantAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderMaster>>> GetOrderMasters()
         {
-            return await _context.OrderMasters./*Include(x => x.User).*/ToListAsync();
+            return await _context.OrderMasters.ToListAsync();
         }
 
         // GET: api/Order/5
@@ -49,14 +49,28 @@ namespace TasteRestaurantAPI.Controllers
                                           foodItem.FoodItemName
                                       }).ToListAsync();
 
-            var orderMaster = await _context.OrderMasters.FindAsync(id);
+            // get order master
+            var orderMaster = await (from a in _context.Set<OrderMaster>()
+                                     where a.OrderMasterId == id
+
+                                     select new
+                                     {
+                                         a.OrderMasterId,
+                                         a.OrderNumber,
+                                         a.PMethod,
+                                         a.GTotal,
+                                         deletedOrderItemIds = "",
+                                         a.Address,
+                                         orderDetails = orderDetails
+                                     }).FirstOrDefaultAsync();
+            //var orderMaster = await _context.OrderMasters.FindAsync(id);
 
             if (orderMaster == null)
             {
                 return NotFound();
             }
 
-            return orderMaster;
+            return Ok(orderMaster);
         }
 
         // PUT: api/Order/5

@@ -1,4 +1,4 @@
-//import React, {useState, useEffect} from 'react'
+import React from 'react'
 import about from "../img/about.jpg"
 import port1 from "../img/portfolio/01-small.jpg"
 import port2 from "../img/portfolio/02-small.jpg"
@@ -12,10 +12,6 @@ import port9 from "../img/portfolio/09-small.jpg"
 import port10 from "../img/portfolio/10-small.jpg"
 import port11 from "../img/portfolio/11-small.jpg"
 import port12 from "../img/portfolio/12-small.jpg"
-// import Login from "./pages/Login"  
-// import Home from "./pages/Home" 
-// import Register from "./pages/Register"
-//import Navbar from "../components/Navbar"
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 const Home = (props) => {

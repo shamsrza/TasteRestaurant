@@ -25,5 +25,6 @@ namespace TasteRestaurantAPI.Models
 
         [NotMapped]
         public string DeletedOrderItemIds { get; set; }
+
     }
 }

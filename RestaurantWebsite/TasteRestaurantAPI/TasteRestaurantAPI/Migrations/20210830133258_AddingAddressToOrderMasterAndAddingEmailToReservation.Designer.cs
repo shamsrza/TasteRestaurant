@@ -9,8 +9,8 @@ using TasteRestaurantAPI.Models;
 namespace TasteRestaurantAPI.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    [Migration("20210828192154_AddingAddressIntoOrderMasterAndDeletingUser")]
-    partial class AddingAddressIntoOrderMasterAndDeletingUser
+    [Migration("20210830133258_AddingAddressToOrderMasterAndAddingEmailToReservation")]
+    partial class AddingAddressToOrderMasterAndAddingEmailToReservation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,6 +101,10 @@ namespace TasteRestaurantAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(500)");
 
@@ -118,12 +122,7 @@ namespace TasteRestaurantAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("ReservationId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
                 });
@@ -168,17 +167,6 @@ namespace TasteRestaurantAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("FoodItem");
-                });
-
-            modelBuilder.Entity("TasteRestaurantAPI.Models.Reservation", b =>
-                {
-                    b.HasOne("TasteRestaurantAPI.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TasteRestaurantAPI.Models.OrderMaster", b =>

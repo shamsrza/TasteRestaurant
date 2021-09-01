@@ -20,14 +20,19 @@ namespace TasteRestaurantAPI.Models
         [Required]
         public string PhoneNumber { get; set; }
 
+        [Column(TypeName = "nvarchar(50)")]
+        [Required]
+        public string Email { get; set; }
+
         [Required]
         public int NumberOfGuests { get; set; }
 
+        [Required]
+        public int TableNumber { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
         [Required]
         public string Date { get; set; }
-
 
         [Column(TypeName = "nvarchar(50)")]
         [Required]
@@ -38,8 +43,8 @@ namespace TasteRestaurantAPI.Models
         public string Message { get; set; }
 
 
-        public int UserId { get; set; }
-        public User User { get; set; }
+        //public int UserId { get; set; }
+        //public User User { get; set; }
 
     }
 }

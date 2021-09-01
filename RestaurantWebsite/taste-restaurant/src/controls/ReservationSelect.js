@@ -5,7 +5,7 @@ import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText,
   const useStyles = makeStyles(theme => ({
     root: {
         '& label': {
-            fontSize: 15,
+            fontSize: 12,
             color: "black",
             fontWeight: 700
           },
@@ -16,7 +16,7 @@ import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText,
 }))
 
 
-export default function Select(props) {
+export default function ReservationSelect(props) {
 
     const classes = useStyles();
 
@@ -24,6 +24,7 @@ export default function Select(props) {
 
     return (
         <FormControl
+            size="small"
             className={classes.root}
            //inputProps={{style: {fontSize: '1em'}}}
             variant={varient || "outlined"}

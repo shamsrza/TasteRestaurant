@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-export default function Input(props) {
+export default function ReservationInput(props) {
     const classes = useStyles();
     //const [values, setValues] = useState('');
 
@@ -27,11 +27,11 @@ export default function Input(props) {
     
     return (
         <TextField
-            size="normal"
+            size="small"
             id="outlined-size-normal"
             className={classes.root}
-            inputProps={{style: {fontSize: 15}}}
-            InputLabelProps={{style: {fontSize: 15}}}
+            inputProps={{style: {fontSize: 12}}}
+            InputLabelProps={{style: {fontSize: 12}}}
             variant={variant || "outlined"}
             label={label}
             name={name}

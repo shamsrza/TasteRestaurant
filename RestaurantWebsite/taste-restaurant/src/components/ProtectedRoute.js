@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children, ...rest }) => {
         <Route
         {...rest}
         render={() => {
-          return localStorage.getItem('token') || sessionStorage.getItem('token') ? (children) : <Login/>;
+          return localStorage.getItem('token') != undefined ? (children) : <Redirect to= "/login"/>;
         }}
         />
       );

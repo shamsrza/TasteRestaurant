@@ -1,29 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, Link,useHistory } from "react-router-dom";
-//import axios from 'axios'
-//import Account from "./Account"
-//import {} from 'bootstrap/dist/css/bootstrap.css';
 
 const Login = (props) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [test, setTest] = useState("");
+  const [token, setToken] = useState("");
 
-  //const pname = props.name;
-
-  const {push} = useHistory();
-
-  useEffect(() => {
-      props.setName(test)
-      if(test !== ""){
-        push("/");
-      }
-  }, [test])
-
-  
-
-  // const setName = ({ pname }) => console.log(props.name);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,15 +19,43 @@ const Login = (props) => {
         email,
         password,
       }),
-    })
+    }).then(response => response.json())
+    .then(data => localStorage.setItem("token", data.token));
+    setToken(token);
 
     const user = await fetch("http://localhost:36540/api/auth/user", {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     }).then(response => response.json()).then(data => setTest(data.name));
-    // const content = await response.json();
-    // props.setName(content.name);
+
   };
+
+
+  const {push} = useHistory();
+  useEffect(() => {
+    props.setName(test)
+    if(test !== ""){
+      push("/");
+    }
+
+
+  // useEffect(() => {
+  //     props.setName(test)
+  //     if(test !== ""){
+  //       if(token == undefined){
+  //         push("/login");
+  //         alert("Your credentials are not correct!");
+  //       }
+  //       else{
+  //         push("/");
+  //       }
+  //     }
+  //     else{
+  //       push("/login");
+  //       //alert("Your credentials are not correct!");
+  //     }
+
+  }, [test])
 
   return (
     <div

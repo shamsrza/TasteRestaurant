@@ -142,7 +142,7 @@ export default function OrderForm(props) {
                  }}
                  />
                 <Input
-                 label = "Address"
+                 label = "Address  "
                  name = "address"
                  value = {values.address}
                  error = {errors.address}
@@ -152,7 +152,7 @@ export default function OrderForm(props) {
              <Grid item xs ={6}>
                 <Input
                  disabled
-                 label = "Grand Total"
+                 label = "Grand Total "
                  name = "gTotal"
                  value = {values.gTotal}
                  InputProps = {{
@@ -162,7 +162,7 @@ export default function OrderForm(props) {
                 }}
                  />
                  <Select
-                 label = "Payment Method"
+                 label = "Payment Method  "
                  name = "pMethod"
                  value = {values.pMethod}
                  onChange = {handleInputChange}

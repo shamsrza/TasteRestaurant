@@ -43,20 +43,31 @@ namespace TasteRestaurantAPI.Controllers
         {
             var user = _repository.GetByEmail(dto.Email);
 
-            if(user == null)
+            if(user == null )
+            return BadRequest(new { message = "Invalid Credentials" });
+
+            if (dto.Email != user.Email)
                 return BadRequest(new { message = "Invalid Credentials" });
 
-            if(!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+            if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
                 return BadRequest(new { message = "Invalid Credentials" });
 
             var jwt = _jwtService.Generate(user.UserId);
 
-            Response.Cookies.Append("jwt", jwt, new CookieOptions{
+
+            Response.Cookies.Append("jwt", jwt, new CookieOptions
+            {
                 HttpOnly = true
             });
 
+            if (jwt == null)
+            {
+                return BadRequest(new { message = "Invalid Credentials" });
+            }
+
             return Ok(new { 
-                message="success"
+                message="success",
+                token = jwt
             });
         }
 
