@@ -1,1 +1,1 @@
-# TasteRestaurant _ with React.js and WebAPI
+# TasteRestaurant webpage_ with React.js and WebAPI
