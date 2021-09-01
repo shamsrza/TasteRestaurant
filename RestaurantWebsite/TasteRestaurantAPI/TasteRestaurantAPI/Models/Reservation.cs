@@ -28,7 +28,7 @@ namespace TasteRestaurantAPI.Models
         public int NumberOfGuests { get; set; }
 
         [Required]
-        public int TableNumber { get; set; }
+        public string TableNumber { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
         [Required]

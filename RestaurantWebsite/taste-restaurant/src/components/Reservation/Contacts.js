@@ -4,17 +4,16 @@ import { Link } from 'react-router-dom';
 export default function Contacts() {
     return (
     <div className="col-lg-12">
-      <div className="left-text-content">
+      <div className="left-text-content" >
         <div className="section-heading">
           <h6><span>Contact Us</span></h6>
-          <h2>
-            Here You Can Make A Reservation Or Just walkin to our cafe
+          <h2>Here You Can <br/> Make A Reservation <br/>Or Just walkin to our cafe
           </h2>
         </div>
         <p>
           Donec pretium est orci, non vulputate arcu hendrerit a. Fusce a
           eleifend riqsie, namei sollicitudin urna diam, sed commodo purus
-          porta ut.
+          portaut.
         </p>
         <div className="row">
           <div className="col-lg-6">

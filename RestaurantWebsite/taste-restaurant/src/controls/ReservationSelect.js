@@ -26,11 +26,11 @@ export default function ReservationSelect(props) {
         <FormControl
             size="small"
             className={classes.root}
-           //inputProps={{style: {fontSize: '1em'}}}
             variant={varient || "outlined"}
             {...(error && { error: true })}>
             <InputLabel>{label}</InputLabel>
             <MuiSelect
+                style={{textAlign: "left"}}
                 label={label}
                 name={name}
                 value={value}

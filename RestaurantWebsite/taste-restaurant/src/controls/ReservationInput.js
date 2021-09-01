@@ -4,8 +4,6 @@ import { TextField , makeStyles, InputLabel, FormHelperText } from '@material-ui
 const useStyles = makeStyles(theme => ({
     root: {
           '& .MuiInputLabel-root': {
-            //fontSize: 14,
-            // size:"normal",
             color: "black",
             fontWeight: 700,
             //marginRight: 15
@@ -30,7 +28,7 @@ export default function ReservationInput(props) {
             size="small"
             id="outlined-size-normal"
             className={classes.root}
-            inputProps={{style: {fontSize: 12}}}
+            inputProps={{style: {fontSize: 12, textAlign: "left"}}}
             InputLabelProps={{style: {fontSize: 12}}}
             variant={variant || "outlined"}
             label={label}
