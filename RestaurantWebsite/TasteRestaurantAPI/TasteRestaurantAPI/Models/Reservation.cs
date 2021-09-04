@@ -22,11 +22,9 @@ namespace TasteRestaurantAPI.Models
 
         [Column(TypeName = "nvarchar(50)")]
         [Required]
-        public string Email { get; set; }
+        public string NumberOfGuests { get; set; }
 
-        [Required]
-        public int NumberOfGuests { get; set; }
-
+        [Column(TypeName = "nvarchar(50)")]
         [Required]
         public string TableNumber { get; set; }
 
@@ -41,6 +39,9 @@ namespace TasteRestaurantAPI.Models
 
         [Column(TypeName = "nvarchar(500)")]
         public string Message { get; set; }
+
+        [NotMapped]
+        public string DeletedOrderItemIds { get; set; }
 
 
         //public int UserId { get; set; }

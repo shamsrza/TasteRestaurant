@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Form from "../../layouts/Form"
 import {Grid, InputAdornment, makeStyles, ButtonGroup, Button as MuiButton, FormHelperText} from "@material-ui/core";
+import {useForm} from "../../hooks/useForm"
 import {Input, Select, Button} from "../../controls";
 import ReplayIcon from '@material-ui/icons/Replay';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
@@ -44,12 +45,11 @@ const pMethods = [
 export default function OrderForm(props) {
 
     const {values, setValues, errors, setErrors, handleInputChange, resetFormControls} = props;
+    const [state, setState] = useState("");
     const classes = useStyles();
-    const [addressInput, setAddressInput] = useState("");
     const [orderListVisibility, setOrderListVisibility] = useState(false);
     const [orderId, setOrderId] = useState(0);
     const [notify, setNotify] = useState({isOpen: false})
-
 
 
     useEffect(() => {
@@ -112,14 +112,12 @@ export default function OrderForm(props) {
                 setNotify({isOpen: true, message: "The order is updated."})
             })
             .catch(err => console.log(err));
-
             }
             
         }
     }
 
-    values.address = addressInput;
-
+    //values.address = addressInput;
 
     const openListOfOrders = () => {
         setOrderListVisibility(true);
@@ -145,8 +143,8 @@ export default function OrderForm(props) {
                  label = "Address  "
                  name = "address"
                  value = {values.address}
+                 onChange={handleInputChange}
                  error = {errors.address}
-                 onChange={e => setAddressInput(e.target.value)}
                  />
             </Grid>
              <Grid item xs ={6}>

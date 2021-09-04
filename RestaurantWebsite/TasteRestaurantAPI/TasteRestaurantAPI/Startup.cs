@@ -40,6 +40,7 @@ namespace TasteRestaurantAPI
             services.AddDbContext<RestaurantDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<JwtService>();

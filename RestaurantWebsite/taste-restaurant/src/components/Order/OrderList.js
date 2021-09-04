@@ -8,6 +8,7 @@ export default function OrderList(props) {
     const { setOrderId, setOrderListVisibility, resetFormControls, setNotify } = props;
 
     const [orderList, setOrderList] = useState([]);
+    
     useEffect(() => {
         createAPIEndpoint(ENDPOINTS.ORDER).fetchAll()
             .then(res => {
@@ -66,7 +67,7 @@ export default function OrderList(props) {
                             <TableCell
                             style={{fontSize: "1em"}}
                                 onClick={e => showForUpdate(item.orderMasterId)}>
-                                {item.gTotal}
+                                {"$ " + item.gTotal}
                             </TableCell>
                             <TableCell style={{fontSize: "1em"}}>
                                 <DeleteOutlineTwoToneIcon

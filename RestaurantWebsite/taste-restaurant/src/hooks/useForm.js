@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 export function useForm(getFreshModelObject) {
 
     const [values, setValues] = useState(getFreshModelObject());
+    //const [addressInput, setAddressInput] = useState(getFreshModelObject());
     const [errors, setErrors] = useState({});
 
     const handleInputChange = e => {
@@ -25,5 +26,7 @@ export function useForm(getFreshModelObject) {
         setErrors,
         handleInputChange,
         resetFormControls
+        // addressInput,
+        // setAddressInput
     }
 }

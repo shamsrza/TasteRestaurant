@@ -42,11 +42,12 @@ namespace TasteRestaurantAPI.Controllers
                                       select new
                                       {
                                           master.OrderMasterId,
+                                          //master.Address,
                                           detail.OrderDetailId,
                                           detail.FoodItemId,
                                           detail.Quantity,
                                           detail.FoodItemPrice,
-                                          foodItem.FoodItemName
+                                          foodItem.FoodItemName,
                                       }).ToListAsync();
 
             // get order master
@@ -59,8 +60,8 @@ namespace TasteRestaurantAPI.Controllers
                                          a.OrderNumber,
                                          a.PMethod,
                                          a.GTotal,
+                                         //a.Address,
                                          deletedOrderItemIds = "",
-                                         a.Address,
                                          orderDetails = orderDetails
                                      }).FirstOrDefaultAsync();
             //var orderMaster = await _context.OrderMasters.FindAsync(id);

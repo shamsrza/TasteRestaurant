@@ -9,8 +9,8 @@ using TasteRestaurantAPI.Models;
 namespace TasteRestaurantAPI.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    [Migration("20210830133258_AddingAddressToOrderMasterAndAddingEmailToReservation")]
-    partial class AddingAddressToOrderMasterAndAddingEmailToReservation
+    [Migration("20210903235227_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,15 +101,12 @@ namespace TasteRestaurantAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("NumberOfGuests")
-                        .HasColumnType("int");
+                    b.Property<string>("NumberOfGuests")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -117,6 +114,10 @@ namespace TasteRestaurantAPI.Migrations
 
                     b.Property<string>("ReservationNumber")
                         .HasColumnType("nvarchar(75)");
+
+                    b.Property<string>("TableNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Time")
                         .IsRequired()

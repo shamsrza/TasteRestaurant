@@ -557,7 +557,7 @@ h6:before {
   #team #reservation-form .left-text-content .phone{
 	  background-color: white;
 	  border-radius: 5%;
-	  margin-top: 30px;
+	  margin-top: 5px;
 	  padding: 15px;
   }
   #team #reservation-form .left-text-content .phone i {
@@ -576,7 +576,7 @@ h6:before {
   #team #reservation-form .left-text-content .message{
 	background-color: white;
 	border-radius: 5%;
-	margin: 30px 0;
+	margin-top: 5px;
 	padding: 15px;
 }
   #team #reservation-form .left-text-content .message i {

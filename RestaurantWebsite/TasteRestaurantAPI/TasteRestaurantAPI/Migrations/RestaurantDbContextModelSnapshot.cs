@@ -99,15 +99,12 @@ namespace TasteRestaurantAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("NumberOfGuests")
-                        .HasColumnType("int");
+                    b.Property<string>("NumberOfGuests")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -118,7 +115,7 @@ namespace TasteRestaurantAPI.Migrations
 
                     b.Property<string>("TableNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Time")
                         .IsRequired()

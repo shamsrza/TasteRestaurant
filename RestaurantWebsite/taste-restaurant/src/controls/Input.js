@@ -20,26 +20,25 @@ const useStyles = makeStyles(theme => ({
 
 export default function Input(props) {
     const classes = useStyles();
-    //const [values, setValues] = useState('');
+    
+    let input = "";
 
     const { name, label, value, variant, onChange, error = null, ...other } = props;
-
     
     return (
         <TextField
-            size="normal"
-            id="outlined-size-normal"
-            className={classes.root}
-            inputProps={{style: {fontSize: 15}}}
-            InputLabelProps={{style: {fontSize: 15}}}
-            variant={variant || "outlined"}
-            label={label}
-            name={name}
-            value={value}
-            onChange={onChange}
-            //onChange={(e) =>{setAddressValue(e.target.value)}}
-            {...other}
-            {...(error && { error: true, helperText: <div style={{fontSize: '13px'}}>{error}</div> })}
+        size="normal"
+        id="outlined-size-normal"
+        className={classes.root}
+        inputProps={{style: {fontSize: 15}}}
+        InputLabelProps={{style: {fontSize: 15}}}
+        variant={variant || "outlined"}
+        label={label}
+        name={name}
+        value= {value}
+        onChange={onChange}
+        {...other}
+        {...(error && { error: true, helperText: <div style={{fontSize: '13px'}}>{error}</div> })}
         />
     )
 }

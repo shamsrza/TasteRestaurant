@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace TasteRestaurantAPI.Migrations
 {
@@ -22,6 +21,41 @@ namespace TasteRestaurantAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OrderMasters",
+                columns: table => new
+                {
+                    OrderMasterId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderNumber = table.Column<string>(type: "nvarchar(75)", nullable: true),
+                    PMethod = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    GTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(100)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderMasters", x => x.OrderMasterId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reservations",
+                columns: table => new
+                {
+                    ReservationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReservationNumber = table.Column<string>(type: "nvarchar(75)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    NumberOfGuests = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    TableNumber = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Time = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(500)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reservations", x => x.ReservationId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -34,53 +68,6 @@ namespace TasteRestaurantAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrderMasters",
-                columns: table => new
-                {
-                    OrderMasterId = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderNumber = table.Column<string>(type: "nvarchar(75)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    PMethod = table.Column<string>(type: "nvarchar(10)", nullable: true),
-                    GTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderMasters", x => x.OrderMasterId);
-                    table.ForeignKey(
-                        name: "FK_OrderMasters_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Reservations",
-                columns: table => new
-                {
-                    ReservationId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ReservationNumber = table.Column<string>(type: "nvarchar(75)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    NumberOfGuests = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "Date", nullable: false, defaultValueSql: "GetUtcDate()"),
-                    Time = table.Column<DateTime>(type: "Date", nullable: false, defaultValueSql: "GetUtcDate()"),
-                    Message = table.Column<string>(type: "nvarchar(500)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reservations", x => x.ReservationId);
-                    table.ForeignKey(
-                        name: "FK_Reservations_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -122,16 +109,6 @@ namespace TasteRestaurantAPI.Migrations
                 column: "OrderMasterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderMasters_UserId",
-                table: "OrderMasters",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reservations_UserId",
-                table: "Reservations",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
@@ -148,13 +125,13 @@ namespace TasteRestaurantAPI.Migrations
                 name: "Reservations");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "FoodItems");
 
             migrationBuilder.DropTable(
                 name: "OrderMasters");
-
-            migrationBuilder.DropTable(
-                name: "Users");
         }
     }
 }

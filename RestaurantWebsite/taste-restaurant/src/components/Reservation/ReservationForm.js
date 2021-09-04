@@ -1,83 +1,160 @@
-import React, {useState} from 'react'
-import { Grid, InputAdornment, makeStyles, TextareaAutosize } from '@material-ui/core';
+import React, {useState, useEffect} from 'react'
+import { Grid, InputAdornment, makeStyles, Typography, Button as MuiButton, ButtonGroup  } from '@material-ui/core';
 import Form from "../../layouts/Form"
 import {ReservationInput, ReservationSelect, Button} from "../../controls";
+import ReplayIcon from '@material-ui/icons/Replay';
+import ReorderIcon from '@material-ui/icons/Reorder';
+import {createAPIEndpoint, ENDPOINTS} from '../../api'
+import Popup from "../../layouts/Popup"
+import ReservationList from "../../components/Reservation/ReservationList"
+import Notification from "../../layouts/Notification"
 
 const useStyles = makeStyles(theme=>({
-  adornmentText: {
-      '& .MuiTypography-root': {
-          color: '#85bb65',
-          fontWeight: 'bolder',
-          fontSize: '2em'
+  submitButtonGroup: {
+      backgroundColor: 'green',
+      border: "none",
+      margin: theme.spacing(1),
+      '& .MuiButton-label': {
+          textTransform: "none",
+          fontSize: '15px',
+      },
+      '&:hover': {
+          backgroundColor: 'green'
       }
   }
   
 }))
 
-const generateReservationNumber = () => Math.floor(100000 + Math.random() * 900000).toString();
-
-const getFreshModelObject = ()=> ({
-        reservationId: 0,
-        reservationNumber: generateReservationNumber(),
-        phoneNumber: "",
-        numberOfGuests: "none",
-        date:"",
-        email: "",
-        time: "",
-        message: "",
-        tableNumber: ""
-    })
+const numberOfGuests = [
+  {id: 1, title: " 1 "},
+  {id: 2, title: " 2 "},
+  {id: 3, title: " 3 "},
+  {id: 4, title: " 4"},
+  {id: 5, title: " 4+ "}
+]
 
 export default function ReservationForm(props) {
 
-  const[values, setValues] = useState(getFreshModelObject());
-  const {errors, setErrors, handleInputChange, resetFormControls} = props;
-  const [phoneInput, setPhoneInput] = useState("");
-  const [textArea, setTextArea] = useState("");
+  const {values, setValues, errors, setErrors, handleInputChange, resetFormControls} = props;
+  
   const classes = useStyles();
+  const [resId, setResId] = useState(0);
+  const [reservationListVisibility, setReservationListVisibility] = useState(false);
+  const [notify, setNotify] = useState({isOpen: false})
 
+
+  useEffect(() => {
+    if (resId == 0){
+
+        resetFormControls()
+    }
+    else {
+        createAPIEndpoint(ENDPOINTS.RESERVATION).fetchById(resId)
+            .then(res => {
+                setValues(res.data);
+                setErrors({});
+            })
+            .catch(err => console.log(err))
+    }
+}, [resId]);
+
+
+  const errorMessage = (
+  <div style={{color: "red"}}>This field is required.</div>
+  )
+
+  const validateForm = () => {
+    let temp = {};
+    temp.phoneNumber = values.phoneNumber != '' ? '' : errorMessage;
+    temp.tableNumber = values.tableNumber != "" ? "" : errorMessage;
+    temp.date = values.date != "" ? "" : errorMessage;
+    temp.time = values.time != "" ? "" : errorMessage;
+    temp.numberOfGuests = values.numberOfGuests != 0 ? "" : errorMessage;
+    setErrors({...temp});
+    return Object.values(temp).every(x => x === "");
+  }
+
+const resetForm = () => {
+  resetFormControls();
+  setResId(0);
+}
+
+
+const submitReservation = e =>
+{
+  e.preventDefault();
+  if(validateForm()){
+    if(values.reservationId == 0){
+    createAPIEndpoint(ENDPOINTS.RESERVATION).create(values)
+    .then(res => {
+      resetFormControls();
+      setNotify({isOpen: true, message: "New reservation is created."})
+    })
+    .catch(err => console.log(err));
+    }
+    else{
+      createAPIEndpoint(ENDPOINTS.RESERVATION).update(values.reservationId, values)
+  .then(res => {
+      setResId(0);
+      setNotify({isOpen: true, message: "The reservation is updated."})
+  })
+  .catch(err => console.log(err));
+  }
+    
+  }   
+}
+
+const openListOfReservations = () => {
+  setReservationListVisibility(true);
+}
     return (
-      <Form style = {{backgroundColor: "white", padding: "15px", borderRadius: "5px", height: "94%"}}>
+      <>
+      <Form onSubmit ={submitReservation} style = {{backgroundColor: "white", padding: "15px", borderRadius: "5px"}}>
             <Grid container>
               <Grid item xs={12}>
                 <h4 style={{fontWeight: 600}}>Table Reservation</h4>
                 <h5 style={{color: 'black', paddingBottom: '10px', fontSize: '12px', fontWeight:'800', fontStyle: 'italic' }}> * Please save your reservation number </h5>
               </Grid>
-            <Grid item xs={6} >
-            <ReservationInput
+              <Grid item xs={6}>
+                <ReservationInput
                  disabled
                  label = 'Reservation number'
                  name = "reservationNumber"
-                 value = {"#  " + values.reservationNumber}
+                 value = {values.reservationNumber}
+                 InputProps = {{
+                  startAdornment : <InputAdornment
+                  position="start"><Typography style= {{fontWeight: 'bolder',
+                  fontSize: '1.8em', color: "#85bb65"}}>#</Typography></InputAdornment>
+                 }}
                  />
                  <ReservationSelect
-                 label= "Guests"
+                 label= "Number of Guests"
                  name="numberOfGuests"
                  onChange = {handleInputChange}
-                 options = {[
-                   {id: 1, title: "1"},
-                   {id: 2, title: "2"},
-                   {id: 3, title: "3"},
-                   {id: 4, title: "4"},
-                   {id: 5, title: "4+"}
-                 ]}
+                 options = {numberOfGuests}
+                 error = {errors.numberOfGuests}
                  />
                  <ReservationInput
                  name = "date"
-                 value = {values.date.id}
                  type= "date"
+                 value = {values.date}
+                 onChange={handleInputChange}
+                 error = {errors.date}
                  />
-            </Grid>
-            <Grid item xs={6}>
+               </Grid>
+
+               <Grid item xs={6}>
+
                 <ReservationInput
-                 label = "Phone"
+                 label = "Phone number"
                  name = "phoneNumber"
-                 // error = {errors.phoneNumber}
-                 onChange={e => setPhoneInput(e.target.value)}
+                 value = {values.phoneNumber}
+                 onChange={handleInputChange}
+                 error = {errors.phoneNumber}
                  />
 
-            <ReservationSelect
-                 label= "Table"
+                <ReservationSelect
+                 label= "Table number"
                  name="tableNumber"
                  onChange = {handleInputChange}
                  options = {[
@@ -91,27 +168,57 @@ export default function ReservationForm(props) {
                    {id: 8, title: "Back 2"},
                    {id: 9, title: "Back 3"}
                  ]}
+                 error = {errors.tableNumber}
                  />
                  <ReservationInput
                  name = "time"
-                 value = {values.time.id}
+                 value = {values.time}
+                 onChange={handleInputChange}
                  type= "time"
+                 error = {errors.time}
                  />
-            </Grid>
+              </Grid>
             <Grid item xs={12}>
-            <TextareaAutosize
-            style={{color:"black", marginTop: "15px", width: "95%", borderRadius: "4px"}}
-            minRows={3}
-            aria-label="maximum height"
+            <ReservationInput
+            value = {values.message}
+            onChange = {handleInputChange}
+            style={{color:"black", marginTop: "15px", width: "95%",borderRadius: "4px"}}
+            size="normal"
             placeholder="Message..."
-            onChange={e => setTextArea(e.target.value)}
             />
-            <button 
-            type="submit"
-            style={{backgroundColor: "green", color: "white", border: "none", padding: "10px 163px", margin: "15px 0", borderRadius: "4px", fontSize: "18px"}}>
-            Make a reservation</button>
+                <ButtonGroup className = {classes.submitButtonGroup}>
+                     <MuiButton
+                     size="large"
+                     type="submit"
+                     style={{padding: "0 140px", color: "white"}}
+                     >SUBMIT</MuiButton>
+                     <MuiButton
+                     size="large"
+                     onClick= {resetForm}
+                     startIcon = {<ReplayIcon />}
+                     />
+                     <MuiButton
+                     size="large"
+                     onClick= {openListOfReservations}
+                     startIcon = {<ReorderIcon />}
+                     />
+                 </ButtonGroup>
+                 {/* <Button
+                 size = "large"
+                 //onClick = {openListOfOrders}
+                 startIcon = {<ReorderIcon />}>ORDERS</Button> */}
             </Grid>
             </Grid>
         </Form>
+        <Popup
+       title={<div style={{textAlign: "center", fontSize: "1.5em"}}>List of Reservations</div>}
+       openPopup={reservationListVisibility}
+       setOpenPopup={setReservationListVisibility}>
+           <ReservationList 
+           {...{setResId, setReservationListVisibility, resetFormControls, setNotify}}/>
+        </Popup>
+        <Notification
+                {...{ notify, setNotify }} />
+      </>
     )
 }

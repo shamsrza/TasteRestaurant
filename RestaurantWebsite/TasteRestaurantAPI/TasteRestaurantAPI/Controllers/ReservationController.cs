@@ -31,14 +31,30 @@ namespace TasteRestaurantAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Reservation>> GetReservation(int id)
         {
-            var reservation = await _context.Reservations.FindAsync(id);
+            //var reservation = await _context.Reservations.FindAsync(id);
+
+            var reservation = await (from a in _context.Set<Reservation>()
+                                     where a.ReservationId == id
+
+                                     select new
+                                     {
+                                         a.ReservationId,
+                                         a.ReservationNumber,
+                                         a.PhoneNumber,
+                                         a.NumberOfGuests,
+                                         a.Date,
+                                         a.Time,
+                                         a.TableNumber,
+                                         a.Message,
+                                         deletedOrderItemIds = ""
+                                     }).FirstOrDefaultAsync();
 
             if (reservation == null)
             {
                 return NotFound();
             }
 
-            return reservation;
+            return Ok(reservation);
         }
 
         // PUT: api/Reservation/5
@@ -52,6 +68,15 @@ namespace TasteRestaurantAPI.Controllers
             }
 
             _context.Entry(reservation).State = EntityState.Modified;
+
+
+            //deleted food items
+            //foreach (var i in reservation.DeletedOrderItemIds.Split(',').Where(x => x != ""))
+            //{
+            //    OrderDetail y = _context.OrderDetails.Find(Convert.ToInt64(i));
+            //    _context.OrderDetails.Remove(y);
+            //}
+
 
             try
             {
@@ -77,10 +102,26 @@ namespace TasteRestaurantAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Reservation>> PostReservation(Reservation reservation)
         {
+            //var reservationDate = await _context.Reservations.FindAsync(reservation.Date);
+            //var reservationTable = await _context.Reservations.FindAsync(reservation.TableNumber);
+
+            //if (reservationDate != null)
+            //{
+            //    if (reservationTable != null)
+            //    {
+            //        return BadRequest(new { message = "This table is booked for this date" });
+            //    }
+
+            //_context.Reservations.Add(reservation);
+            //await _context.SaveChangesAsync();
+            
+            //}
+
+
             _context.Reservations.Add(reservation);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetReservation", new { id = reservation.ReservationId }, reservation);
+            
         }
 
         // DELETE: api/Reservation/5
