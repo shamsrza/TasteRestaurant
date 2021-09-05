@@ -1,13 +1,13 @@
 ﻿@model FoodItem
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Update";
 }
 
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Create new food item</h4>
+                <h4 class="card-title">Update food item</h4>
                 <form class="forms-sample" method="post" autocomplete="off">
                     <div class="form-group">
                         <label asp-for="FoodItemName">Name</label>
@@ -23,7 +23,7 @@
                         <label asp-for="Description">Description</label>
                         <textarea asp-for="Description" class="form-control" rows="4"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="submit" class="btn btn-primary mr-2">Update</button>
                     <a asp-action="Index" class="btn btn-light">Cancel</a>
                 </form>
             </div>

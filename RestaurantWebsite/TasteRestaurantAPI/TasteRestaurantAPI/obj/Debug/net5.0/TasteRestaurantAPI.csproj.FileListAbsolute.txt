@@ -155,3 +155,5 @@ C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRest
 C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\FoodItem\Index.cshtml.g.cs
 C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\FoodItem\Detail.cshtml.g.cs
 C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\FoodItem\Create.cshtml.g.cs
+C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\FoodItem\Update.cshtml.g.cs
+C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\FoodItem\Delete.cshtml.g.cs
