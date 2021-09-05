@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    FoodItem foodItem = Model;
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin grid-margin-md-0 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Details of Food Item</h4>
+                @*<p class="card-description">Add class <code>.list-star</code> to <code>&lt;ul&gt;</code></p>*@
+                <ul style="list-style: none">
+                    <li><i class="mdi mdi-food-fork-drink" style="color: orange; font-size: 17px"></i> <span style="margin-right: 15px; font-weight: bold">NAME : </span> @foodItem.FoodItemName</li>
+                    <li><i class="mdi mdi-currency-usd" style="color: orange; font-size: 18px"></i> <span style="margin-right: 15px; font-weight: 800">PRICE : </span> $ @foodItem.Price</li>
+                    <li><i class="mdi mdi-forum" style="color: orange; font-size: 18px"></i> <span style="margin-right: 15px; font-weight: 800">DESCRIPTION : </span> @Html.Raw(foodItem.Description)</li>
+                </ul>
+
+                <div>
+                    <a class="btn btn-success" asp-action="Index"> <<< Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

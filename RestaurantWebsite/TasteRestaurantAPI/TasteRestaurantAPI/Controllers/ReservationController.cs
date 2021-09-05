@@ -102,8 +102,14 @@ namespace TasteRestaurantAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Reservation>> PostReservation(Reservation reservation)
         {
-            //var reservationDate = await _context.Reservations.FindAsync(reservation.Date);
-            //var reservationTable = await _context.Reservations.FindAsync(reservation.TableNumber);
+            //var reservedDate = await _context.Reservations.FindAsync(reservation.Date);
+            //var reservedTable = await _context.Reservations.FindAsync(reservation.TableNumber);
+            //var isExistReservation = await _context.Reservations.FindAsync(reservation.Date, reservation.TableNumber);
+            //if (isExistReservation == null)
+            //{
+            //    ModelState.AddModelError("", "This table is reserved for this date. Please select another option.");
+            //    return BadRequest(new { message = "This table is booked for this date" });
+            //}
 
             //if (reservationDate != null)
             //{
@@ -112,9 +118,9 @@ namespace TasteRestaurantAPI.Controllers
             //        return BadRequest(new { message = "This table is booked for this date" });
             //    }
 
-            //_context.Reservations.Add(reservation);
-            //await _context.SaveChangesAsync();
-            
+            //    _context.Reservations.Add(reservation);
+            //    await _context.SaveChangesAsync();
+
             //}
 
 

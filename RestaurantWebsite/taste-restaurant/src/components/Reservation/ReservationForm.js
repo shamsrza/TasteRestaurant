@@ -41,6 +41,7 @@ export default function ReservationForm(props) {
   const [resId, setResId] = useState(0);
   const [reservationListVisibility, setReservationListVisibility] = useState(false);
   const [notify, setNotify] = useState({isOpen: false})
+  const [existRes, setExistRes ] = useState(false);
 
 
   useEffect(() => {
@@ -79,30 +80,45 @@ const resetForm = () => {
   setResId(0);
 }
 
-
-const submitReservation = e =>
-{
-  e.preventDefault();
-  if(validateForm()){
-    if(values.reservationId == 0){
-    createAPIEndpoint(ENDPOINTS.RESERVATION).create(values)
-    .then(res => {
-      resetFormControls();
-      setNotify({isOpen: true, message: "New reservation is created."})
+//For checking if this reservation is exist or not
+const existedReservation = () => {
+  // const newRes = {};
+  createAPIEndpoint(ENDPOINTS.RESERVATION).fetchByDate(values)
+    .then(response => {
+      if(values.tableNumber == response.tableNumber){
+        setExistRes(true);
+        console.log("exist");
+      }
     })
-    .catch(err => console.log(err));
-    }
-    else{
-      createAPIEndpoint(ENDPOINTS.RESERVATION).update(values.reservationId, values)
-  .then(res => {
-      setResId(0);
-      setNotify({isOpen: true, message: "The reservation is updated."})
-  })
-  .catch(err => console.log(err));
+ }
+
+
+ const submitReservation = (e, newRes) =>
+ {
+   e.preventDefault();
+  //   if(existedReservation())
+  //    setNotify({isOpen: true, message: "This reservation is existed."})
+
+   if(validateForm()){
+    if(values.reservationId == 0){
+     createAPIEndpoint(ENDPOINTS.RESERVATION).create(values)
+     .then(res => {
+       resetFormControls();
+       setNotify({isOpen: true, message: "New reservation is created."})
+     })
+     .catch(err => console.log(err));
+     }
+     else{
+       createAPIEndpoint(ENDPOINTS.RESERVATION).update(values.reservationId, values)
+   .then(res => {
+       setResId(0);
+       setNotify({isOpen: true, message: "The reservation is updated."})
+   })
+   .catch(err => console.log(err));
+   }
+
+   }   
   }
-    
-  }   
-}
 
 const openListOfReservations = () => {
   setReservationListVisibility(true);

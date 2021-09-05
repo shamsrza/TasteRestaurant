@@ -25,7 +25,11 @@ namespace TasteRestaurantAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<string>("FoodItemName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("Price")

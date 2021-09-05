@@ -13,7 +13,13 @@ namespace TasteRestaurantAPI.Models
         public int FoodItemId { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
+        [Required]
         public string FoodItemName { get; set; }
+
+        [Required]
         public decimal Price { get; set; }
+
+        [Column(TypeName = "nvarchar(500)")]
+        public string Description { get; set; }
     }
 }

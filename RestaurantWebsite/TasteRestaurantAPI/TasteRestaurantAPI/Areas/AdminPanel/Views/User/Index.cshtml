@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    List<User> users = Model;
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Users</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in users)
+                            {
+                            <tr>
+                                <td>@user.Name</td>
+                                <td>
+                                    <a class="btn btn-success" asp-action="Detail" asp-route-id="@user.UserId"><i class="mdi mdi-account-card-details" style="font-weight: 800"></i></a>
+                                    <a class="btn btn-success"><i class="mdi mdi-refresh" style="font-weight: 800"></i></a>
+                                    <a class="btn btn-success"><i class="mdi mdi-delete" style="font-weight: 800"></i></a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

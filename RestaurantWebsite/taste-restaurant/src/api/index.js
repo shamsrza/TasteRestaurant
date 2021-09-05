@@ -14,6 +14,7 @@ export const createAPIEndpoint = endpoint => {
     return {
         fetchAll:() => axios.get(url),
         fetchById: id => axios.get(url + id),
+        fetchByDate: date => axios.get(url + date),
         create: newRecord => axios.post(url, newRecord),
         update: (id, updatedRecord) => axios.put(url + id, updatedRecord),
         delete: id => axios.delete(url + id)

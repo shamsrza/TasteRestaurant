@@ -44,6 +44,7 @@ namespace TasteRestaurantAPI
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<JwtService>();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +59,7 @@ namespace TasteRestaurantAPI
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseStaticFiles();
 
 
             //CORS
@@ -72,6 +74,11 @@ namespace TasteRestaurantAPI
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
+                    );
+
                 endpoints.MapControllers();
             });
         }
