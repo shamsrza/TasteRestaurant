@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace TasteRestaurantAPI.Models
 {
+
     public class OrderMaster
     {
         [Key]
         public long OrderMasterId  { get; set; }
+
         [Column(TypeName = "nvarchar(75)")]
         public string OrderNumber  { get; set; }
 

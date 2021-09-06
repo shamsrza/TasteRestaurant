@@ -87,7 +87,7 @@ namespace TasteRestaurantAPI.Areas.AdminPanel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id, FoodItem fItem)
+        public async Task<IActionResult> Update(int? id, FoodItem foodItem)
         {
             if (!ModelState.IsValid)
                 return View();
@@ -97,7 +97,7 @@ namespace TasteRestaurantAPI.Areas.AdminPanel.Controllers
                 return NotFound();
             }
 
-            if(id != fItem.FoodItemId)
+            if (id != foodItem.FoodItemId)
             {
                 return BadRequest();
             }
@@ -108,19 +108,21 @@ namespace TasteRestaurantAPI.Areas.AdminPanel.Controllers
                 return NotFound();
             }
 
-            var isExist = await _context.FoodItems.AnyAsync(x => x.FoodItemName.ToLower() == fItem.FoodItemName.ToLower() 
+            var isExist = await _context.FoodItems.AnyAsync(x => x.FoodItemName.ToLower() == foodItem.FoodItemName.ToLower() 
                                                               && x.FoodItemId != id);
             if (isExist)
             {
-                ModelState.AddModelError("FoodItemName", "Food item with this name is already existed.");
+                ModelState.AddModelError("FoodItemName", "Food item with this name already exists.");
                 return View();
             }
-            return View();
 
-            dbFoodItem.FoodItemName = fItem.FoodItemName;
-            dbFoodItem.Description = fItem.Description;
-            dbFoodItem.Price = fItem.Price;
+            //return Json(foodItem);
 
+            dbFoodItem.FoodItemName = foodItem.FoodItemName;
+            dbFoodItem.Description = foodItem.Description;
+            //dbFoodItem.Price = foodItem.Price;
+
+            //_context.FoodItems.Update(foodItem);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }

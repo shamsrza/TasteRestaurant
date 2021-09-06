@@ -188,11 +188,24 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#orders" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                            <span class="menu-title">Orders</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="orders">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="AdminPanel" asp-controller="Order" asp-action="Index">Order list</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="AdminPanel" asp-controller="Order" asp-action="Create">Add new order</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    @*<li class="nav-item">
                         <a class="nav-link" href="pages/forms/basic_elements.html">
                             <i class="mdi mdi-view-headline menu-icon"></i>
                             <span class="menu-title">Form elements</span>
                         </a>
-                    </li>
+                    </li>*@
                     <li class="nav-item">
                         <a class="nav-link" href="pages/charts/chartjs.html">
                             <i class="mdi mdi-chart-pie menu-icon"></i>

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    OrderMaster orderMaster = Model;
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin grid-margin-md-0 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Order Details</h4>
+              
+                <ul style="list-style: none">
+                    <li><i class="mdi mdi-bookmark-check" style="color: orange; font-size: 17px"></i> <span style="margin-right: 15px; font-weight: bold">ORDER NUMBER : </span> # @orderMaster.OrderNumber</li>
+                    <li><i class="mdi mdi-currency-usd" style="color: orange; font-size: 18px"></i> <span style="margin-right: 15px; font-weight: 800">GRAND TOTAL : </span> $ @orderMaster.GTotal</li>
+                    <li><i class="mdi mdi-cash-multiple" style="color: orange; font-size: 18px"></i> <span style="margin-right: 15px; font-weight: 800">PAYMENT METHOD : </span> @orderMaster.PMethod</li>
+                    <li><i class="mdi mdi-map-marker" style="color: orange; font-size: 18px"></i> <span style="margin-right: 15px; font-weight: 800">ADDRESS : </span> @orderMaster.Address</li>
+                </ul>
+
+            <div>
+                <a class="btn btn-success" asp-action="Index"> <<< Back</a>
+                <a class="btn btn-success" asp-action="OrderedFoodItems" asp-route-id="@orderMaster.OrderMasterId"> Ordered Food Items >>></a>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -13,14 +13,14 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 1 "C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\Areas\AdminPanel\Views\_ViewImports.cshtml"
+#line 2 "C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\Areas\AdminPanel\Views\_ViewImports.cshtml"
 using TasteRestaurantAPI.Models;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"76f9afc49b474402eff57f625f74f529d62bc34c", @"/Areas/AdminPanel/Views/FoodItem/Create.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e7a7bf3660d30962406fe503e0d92810a22eeb71", @"/Areas/AdminPanel/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"08fb389aa1ec5843e7d474c0f8dc53f1c38555df", @"/Areas/AdminPanel/Views/_ViewImports.cshtml")]
     public class Areas_AdminPanel_Views_FoodItem_Create : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<FoodItem>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("form-control"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
