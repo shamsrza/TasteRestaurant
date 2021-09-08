@@ -1,0 +1,91 @@
+﻿
+@model Reservation
+@{
+    ViewData["Title"] = "Create";
+    Random rnd = new Random();
+    var randomNumber = rnd.Next(100000, 999999).ToString();
+
+}
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Create new reservation</h4>
+                <form class="forms-sample" method="post" autocomplete="off">
+                    <div class="form-group">
+                        <label asp-for="ReservationNumber">Reservation No.</label>
+                        <input asp-for="ReservationNumber" disabled value=@randomNumber class="form-control" placeholder="Reservation number">
+                        <span asp-validation-for="ReservationNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TableNumber">Table No.</label>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="F1">Front 1</option>
+                            <option value="F2">Front 2</option>
+                            <option value="F3">Front 3</option>
+                            <option value="C1">Center 1</option>
+                            <option value="C2">Center 2</option>
+                            <option value="C3">Center 3</option>
+                            <option value="B1">Back 1</option>
+                            <option value="B2">Back 2</option>
+                            <option value="B3">Back 3</option>
+                        </select>
+                        <span asp-validation-for="TableNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NumberOfGuests">Number of guests</label>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">4+</option>
+                        </select>
+                        <span asp-validation-for="NumberOfGuests" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Date">Date <span style="color: grey; font-style: italic">(yyyy-mm-dd)</span> </label>
+                        <input asp-for="Date" type="text" class="form-control" placeholder="Date">
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Time">Time <span style="color: grey; font-style: italic">(hh-mm)</span></label>
+                        <input asp-for="Time" type="text" class="form-control" placeholder="Time">
+                        <span asp-validation-for="Time" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber">Phone number</label>
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Phone number">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    @*<div class="form-group">
+                        <label asp-for="Message">Message</label>
+                        <textarea asp-for="Message" class="form-control" rows="4"></textarea>
+                    </div>*@
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <a asp-action="Index" class="btn btn-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Message'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}*@
+<script>
+    const generateOrderNumber = () => Math.floor(100000 + Math.random() * 900000).toString();
+</script >
+

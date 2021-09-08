@@ -200,33 +200,46 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#reservations" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-seat-recline-extra" style="font-size: 23px; margin-right: 15px; padding: 0"></i>
+                            <span class="menu-title">Reservations</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="reservations">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="AdminPanel" asp-controller="Reservation" asp-action="Index">Reservation list</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="AdminPanel" asp-controller="Reservation" asp-action="Create">Add new reservation</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     @*<li class="nav-item">
-                        <a class="nav-link" href="pages/forms/basic_elements.html">
-                            <i class="mdi mdi-view-headline menu-icon"></i>
-                            <span class="menu-title">Form elements</span>
-                        </a>
-                    </li>*@
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/charts/chartjs.html">
-                            <i class="mdi mdi-chart-pie menu-icon"></i>
-                            <span class="menu-title">Charts</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/tables/basic-table.html">
-                            <i class="mdi mdi-grid-large menu-icon"></i>
-                            <span class="menu-title">Tables</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
-                            <i class="mdi mdi-emoticon menu-icon"></i>
-                            <span class="menu-title">Icons</span>
-                        </a>
-                    </li>
+            <a class="nav-link" href="pages/forms/basic_elements.html">
+                <i class="mdi mdi-view-headline menu-icon"></i>
+                <span class="menu-title">Form elements</span>
+            </a>
+        </li>*@
+                    @*<li class="nav-item">
+            <a class="nav-link" href="pages/charts/chartjs.html">
+                <i class="mdi mdi-chart-pie menu-icon"></i>
+                <span class="menu-title">Charts</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="pages/tables/basic-table.html">
+                <i class="mdi mdi-grid-large menu-icon"></i>
+                <span class="menu-title">Tables</span>
+            </a>
+        </li>*@
+                    @*<li class="nav-item">
+            <a class="nav-link" href="pages/icons/mdi.html">
+                <i class="mdi mdi-emoticon menu-icon"></i>
+                <span class="menu-title">Icons</span>
+            </a>
+        </li>*@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                            <i class="mdi mdi-account menu-icon"></i>
+                            <i class="mdi mdi-account-multiple" style="font-size: 23px; margin-right: 15px; padding: 0"></i>
                             <span class="menu-title">Users</span>
                             <i class="menu-arrow"></i>
                         </a>

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Reservation reservation = Model;
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin grid-margin-md-0 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Details of Food Item</h4>
+                <ul style="list-style: none">
+                    <li><i class="mdi mdi-checkbox-marked-circle" style="color: orange; font-size: 17px"></i> <span style="margin-right: 15px; margin-left: 10px; font-weight: bold ">RESERVATION No. : </span> # @reservation.ReservationNumber</li>
+                    <li><i class="mdi mdi-seat-recline-normal" style="color: orange; font-size: 18px"></i> <span style="margin-right: 15px; margin-left: 10px; font-weight: 800 ">TABLE No. : </span> @reservation.TableNumber.</li>
+                    <li><i class="mdi mdi-calendar-clock" style="color: orange; font-size: 18px"></i> <span style="margin-right: 15px; margin-left: 10px; font-weight: 800 ">DATE & TIME : </span> @reservation.Date  / @reservation.Time</li>
+                    <li><i class="mdi mdi-account-multiple-plus" style="color: orange; font-size: 18px"></i> <span style="margin-right: 15px; margin-left: 10px; font-weight: 800 ">GUESTS' COUNT : </span> @reservation.NumberOfGuests</li>
+                    <li><i class="mdi mdi-phone-incoming" style="color: orange; font-size: 18px"></i> <span style="margin-right: 15px; margin-left: 10px; font-weight: 800">PHONE No. : </span> @reservation.PhoneNumber</li>
+                </ul>
+
+                <div style="display: flex">
+                    <form method="post"><button type="submit" class="btn btn-primary mr-2">Delete</button></form>
+                    <a class="btn btn-light" asp-action="Index">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

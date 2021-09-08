@@ -54,6 +54,32 @@ namespace TasteRestaurantAPI.Areas.AdminPanel.Controllers
             return View(orderDetails);
         }
 
+        public IActionResult Create()
+        {
+            var fooditems = _context.FoodItems.ToList();
+            return View(fooditems);
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(OrderMaster ordermaster)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View();
+        //    }
+
+        //    var isExist = await _context.FoodItems.AnyAsync(x => x.FoodItemName.ToLower() == foodItem.FoodItemName.ToLower());
+        //    if (isExist)
+        //    {
+        //        ModelState.AddModelError("FoodItemName", "Food item with this name is already existed.");
+        //        return View();
+        //    }
+
+        //    await _context.FoodItems.AddAsync(foodItem);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
 
         public async Task<IActionResult> Delete(long? id)
         {

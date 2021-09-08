@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    List<FoodItem> fooditems = Model;
+}
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Create new order</h4>
+
+                <form method="post" autocomplete="off" style="display: flex; flex-direction: row">
+                    <span style="font-weight: bold; margin-right: 20px ">1. </span>
+                    <fieldset class="itemgroup" style="display: flex; flex-direction: row; margin-right: 50px">
+
+                        <select name="ValOne" style="margin-right: 30px">
+                            <option selected="" value="" disabled> Choose food item name</option>
+                            @foreach (FoodItem fooditem in fooditems)
+                            {
+                                <option value="@fooditem.Price" id="ValOne" name="Price">
+                                    @fooditem.FoodItemName ........... $@fooditem.Price
+                                </option>
+                            }
+                        </select>
+
+                        <select name="ValTwo" style="margin-right: 30px">
+                            <option selected="" value="" disabled> Choose quantity (per food item)</option>
+                            @for (var i = 1; i <= 100; i++)
+                            {
+                                <option value="i" id="ValTwo" name="i">@i</option>
+                            }
+                        </select>
+                        @*<input type="text" id="show_only" disabled="">*@
+                        @*<span asp-validation-for="item.FoodItemName" class="text-danger"></span>*@
+                    </fieldset>
+                    <button type="button" onClick=(multiply) class="btn btn-primary mr-2">Submit</button>
+                    <div id="result" name="result"></div>
+                    @*<input type="submit" onClick="multiplyBy()" Value="Multiply"/>*@
+                    @*<button type="submit" onClick=("function ()")class="btn btn-primary mr-2">Submit</button>*@
+                    @*<button onclick="submitForm(event)">Calculate</button>*@
+                    @*<a asp-action="Index" class="btn btn-light">Cancel</a>*@
+                </form>
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function multiply() {
+        num1 = document.getElementById("ValOne").val();
+        num2 = document.getElementById("ValTwo").val();
+        result = (num1 * num2).toString();
+        //alert(result);
+        document.getElementById("result").val() = result;
+    }
+</script>
