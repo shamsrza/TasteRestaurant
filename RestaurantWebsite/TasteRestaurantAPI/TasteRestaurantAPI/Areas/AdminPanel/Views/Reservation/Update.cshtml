@@ -1,0 +1,73 @@
+﻿
+@model Reservation
+@{
+    ViewData["Title"] = "Update";
+    ViewBag.ReservationNumber = "Update";
+    @*@using(Html.BeginForm("Detail", "Reservation", FormMethod.Get))
+     {
+        @Html.TextBoxFor(m => m.ReservationNumber, new { disabled = "disabled", @readonly = "readonly" })
+     }*@
+}
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Create new reservation</h4>
+                <form class="forms-sample" method="post" autocomplete="off">
+                    @*@using (Html.BeginForm("Detail", "Reservation", FormMethod.Get))
+        {
+            <div class="form-group" autocomplete="off">
+                <label asp-for="ReservationNumber">Reservation number</label>
+                <input autocomplete="false" asp-for="ReservationNumber" class="form-control" disabled>
+                <span asp-validation-for="ReservationNumber" class="text-danger"></span>
+            </div>
+        }*@
+                    @using (Html.BeginForm("Update", "Reservation", FormMethod.Post))
+                    {
+                        <div class="form-group" autocomplete="off">
+                            <label asp-for="TableNumber">Table number</label>
+                            @*@Html.TextBoxFor(m => m.TableNumber, new { disabled = "disabled", @readonly = "readonly" })*@
+                            @Html.DropDownListFor(m => m.TableNumber, new List<SelectListItem>
+                            { new SelectListItem{Text="Front 1", Value="Front 1"},
+                              new SelectListItem{Text="Front 2", Value="Front 2"},
+                              new SelectListItem{Text="Front 3", Value="Front 3"},
+                              new SelectListItem{Text="Center 1", Value="Center 1"},
+                              new SelectListItem{Text="Center 2", Value="Center 2"},
+                              new SelectListItem{Text="Center 3", Value="Center 3"},
+                              new SelectListItem{Text="Back 1", Value="Back 1"},
+                              new SelectListItem{Text="Back 2", Value="Back 2"},
+                              new SelectListItem{Text="Back 3", Value="Back 3"}}, "Choose new table")
+
+                            <span asp-validation-for="TableNumber" class="text-danger"></span>
+                        </div>
+
+                        <div autocomplete="false" class="form-group">
+                            <label asp-for="NumberOfGuests">Number of guests</label>
+                            <input autocomplete="false" asp-for="NumberOfGuests" class="form-control" placeholder="Number of guests">
+                            <span asp-validation-for="NumberOfGuests" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" autocomplete="off">
+                            <label asp-for="Date">Date <span style="color: grey; font-style: italic">(yyyy-mm-dd)</span> </label>
+                            <input asp-for="Date" type="text" class="form-control" placeholder="Date">
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" autocomplete="off">
+                            <label asp-for="Time">Time <span style="color: grey; font-style: italic">(hh-mm)</span></label>
+                            <input asp-for="Time" type="text" class="form-control" placeholder="Time">
+                            <span asp-validation-for="Time" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" autocomplete="off">
+                            <label asp-for="PhoneNumber">Phone number</label>
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Phone number">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <a asp-action="Index" class="btn btn-light">Cancel</a>
+                    }
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

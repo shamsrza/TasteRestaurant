@@ -97,10 +97,10 @@ namespace TasteRestaurantAPI.Areas.AdminPanel.Controllers
                 return NotFound();
             }
 
-            if (id != foodItem.FoodItemId)
-            {
-                return BadRequest();
-            }
+            //if (id != foodItem.FoodItemId)
+            //{
+            //    return BadRequest();
+            //}
 
             var dbFoodItem = await _context.FoodItems.FindAsync(id);
             if (dbFoodItem == null)
@@ -119,10 +119,9 @@ namespace TasteRestaurantAPI.Areas.AdminPanel.Controllers
             //return Json(foodItem);
 
             dbFoodItem.FoodItemName = foodItem.FoodItemName;
+            dbFoodItem.Price = foodItem.Price;
             dbFoodItem.Description = foodItem.Description;
-            //dbFoodItem.Price = foodItem.Price;
 
-            //_context.FoodItems.Update(foodItem);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }

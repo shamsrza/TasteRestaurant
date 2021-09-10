@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Majestic Admin</title>
+    <title>Taste Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="~/admin/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/admin/vendors/base/vendor.bundle.base.css">
@@ -17,17 +17,21 @@
     <link rel="stylesheet" href="~/admin/css/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="~/admin/images/favicon.png" />
+    <!-- logo-font-family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
-                <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-                    <a class="navbar-brand brand-logo" href="index.html"><img src="~/admin/images/logo.svg" alt="logo" /></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="~/admin/images/logo-mini.svg" alt="logo" /></a>
+                <div class="navbar-brand-inner-wrapper d-flex justify-content-start align-items-center w-100">
+                    <a class="navbar-brand brand-logo" href=""><i class="mdi mdi-silverware-variant" style="font-size: 18px; background-color: #4d83ff; color: white; font-weight: 600; border-radius: 50%; margin-right: 2px; padding: 2px 4px"></i></a>
+                    <a class="navbar-brand brand-logo" style="font-family: 'Dancing Script', cursive; font-size: 20px; color: #4d83ff; font-weight: 600;margin: 0 60px 0 0" href="">Taste ~ Admin</a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                        <span class="mdi mdi-sort-variant"></span>
+                        <span class="mdi mdi-sort-variant" style="color: #4d83ff; font-weight: 600"></span>
                     </button>
                 </div>
             </div>
@@ -168,12 +172,12 @@
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                    <li class="nav-item">
+                    @*<li class="nav-item">
                         <a class="nav-link" href="index.html">
-                            <i class="mdi mdi-home menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
+                            <i class="mdi mdi-home menu-icon" style="color: #4d83ff"></i>
+                            <span class="menu-title" style="color: #4d83ff">Dashboard</span>
                         </a>
-                    </li>
+                    </li>*@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                             <i class="mdi mdi-food" style="font-size: 23px; margin-right: 15px; padding: 0"></i>

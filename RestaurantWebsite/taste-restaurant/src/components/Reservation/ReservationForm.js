@@ -174,15 +174,15 @@ const openListOfReservations = () => {
                  name="tableNumber"
                  onChange = {handleInputChange}
                  options = {[
-                   {id: 1, title: "Front 1"},
-                   {id: 2, title: "Front 2"},
-                   {id: 3, title: "Front 3"},
-                   {id: 4, title: "Center 1"},
-                   {id: 5, title: "Center 2"},
-                   {id: 6, title: "Center 3"},
-                   {id: 7, title: "Back 1"},
-                   {id: 8, title: "Back 2"},
-                   {id: 9, title: "Back 3"}
+                   {id: "Front 1", title: "Front 1"},
+                   {id: "Front 2", title: "Front 2"},
+                   {id: "Front 3", title: "Front 3"},
+                   {id: "Center 1", title: "Center 1"},
+                   {id: "Center 2", title: "Center 2"},
+                   {id: "Center 3", title: "Center 3"},
+                   {id: "Back 1", title: "Back 1"},
+                   {id: "Back 2", title: "Back 2"},
+                   {id: "Back 3", title: "Back 3"}
                  ]}
                  error = {errors.tableNumber}
                  />
