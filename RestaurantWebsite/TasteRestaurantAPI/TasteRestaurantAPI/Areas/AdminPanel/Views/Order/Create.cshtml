@@ -11,48 +11,44 @@
                 <h4 class="card-title">Create new order</h4>
 
                 <form method="post" autocomplete="off" style="display: flex; flex-direction: row">
-                    <span style="font-weight: bold; margin-right: 20px ">1. </span>
-                    <fieldset class="itemgroup" style="display: flex; flex-direction: row; margin-right: 50px">
-
-                        <select name="ValOne" style="margin-right: 30px">
+                    @*<span style="font-weight: bold; margin-right: 20px ">1. </span>*@
+                    <div class="form-group">
+                        <select id="ValOne" style="margin-right: 30px">
                             <option selected="" value="" disabled> Choose food item name</option>
-                            @foreach (FoodItem fooditem in fooditems)
+                            @foreach (var fooditem in fooditems)
                             {
-                                <option value="@fooditem.Price" id="ValOne" name="Price">
+                                <option id="ValOne" value="@fooditem.Price" name="Price">
                                     @fooditem.FoodItemName ........... $@fooditem.Price
                                 </option>
                             }
                         </select>
-
-                        <select name="ValTwo" style="margin-right: 30px">
-                            <option selected="" value="" disabled> Choose quantity (per food item)</option>
-                            @for (var i = 1; i <= 100; i++)
-                            {
-                                <option value="i" id="ValTwo" name="i">@i</option>
-                            }
-                        </select>
-                        @*<input type="text" id="show_only" disabled="">*@
-                        @*<span asp-validation-for="item.FoodItemName" class="text-danger"></span>*@
-                    </fieldset>
-                    <button type="button" onClick=(multiply) class="btn btn-primary mr-2">Submit</button>
-                    <div id="result" name="result"></div>
-                    @*<input type="submit" onClick="multiplyBy()" Value="Multiply"/>*@
-                    @*<button type="submit" onClick=("function ()")class="btn btn-primary mr-2">Submit</button>*@
-                    @*<button onclick="submitForm(event)">Calculate</button>*@
-                    @*<a asp-action="Index" class="btn btn-light">Cancel</a>*@
+                    </div>
+                    <div class="form-group">
+                        <input id="ValTwo" class="form-control" placeholder="Quantity" >
+                    </div>
+                    
+                    <div class="form-group" style="display: flex; margin-left: 30px">
+                        <button onClick={multiple} class="btn btn-primary mr-2">Submit</button>
+                        <input id="result" value="(@ViewBag.Quantity * @ViewBag.Price).toString()"/>
+                    </div>
                 </form>
-                
 
             </div>
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <script>
-    function multiply() {
-        num1 = document.getElementById("ValOne").val();
-        num2 = document.getElementById("ValTwo").val();
-        result = (num1 * num2).toString();
-        //alert(result);
-        document.getElementById("result").val() = result;
+    //$("#result").bind("click", function () {
+    //    num1 = document.getElementById("ValOne").val();
+    //    num2 = document.getElementById("ValTwo").val();
+    //    total = (num1 * num2).toString();
+    //    alert(total);
+    //});
+    const multiple = () => {
+        document.getElementById("ValOne").val() = @ViewBag.Price
+        document.getElementById("ValTwo").val() = @ViewBag.Quantity;
+        document.getElementById("result").val() = (@ViewBag.Quantity * @ViewBag.Price).toString();
     }
 </script>

@@ -167,3 +167,5 @@ C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRest
 C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Reservation\Delete.cshtml.g.cs
 C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Reservation\Create.cshtml.g.cs
 C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Reservation\Update.cshtml.g.cs
+C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\User\Delete.cshtml.g.cs
+C:\Users\srzayeva\Desktop\ASP.NET\RestaurantWebsite\TasteRestaurantAPI\TasteRestaurantAPI\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\User\Update.cshtml.g.cs

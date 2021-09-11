@@ -24,8 +24,8 @@
                                 <td>@user.Name</td>
                                 <td>
                                     <a class="btn btn-success" asp-action="Detail" asp-route-id="@user.UserId"><i class="mdi mdi-account-card-details" style="font-weight: 800"></i></a>
-                                    <a class="btn btn-success"><i class="mdi mdi-refresh" style="font-weight: 800"></i></a>
-                                    <a class="btn btn-success"><i class="mdi mdi-delete" style="font-weight: 800"></i></a>
+                                    <a class="btn btn-success" asp-action="Update" asp-route-id="@user.UserId"><i class="mdi mdi-refresh" style="font-weight: 800"></i></a>
+                                    <a class="btn btn-success" asp-action="Delete" asp-route-id="@user.UserId"><i class="mdi mdi-delete" style="font-weight: 800"></i></a>
                                 </td>
                             </tr>
                             }

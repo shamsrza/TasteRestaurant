@@ -56,8 +56,8 @@ namespace TasteRestaurantAPI.Areas.AdminPanel.Controllers
 
         public IActionResult Create()
         {
-            var fooditems = _context.FoodItems.ToList();
-            return View(fooditems);
+            var orders = _context.OrderDetails.ToList();
+            return View(orders);
         }
 
         //[HttpPost]
@@ -80,6 +80,7 @@ namespace TasteRestaurantAPI.Areas.AdminPanel.Controllers
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction("Index");
         //}
+
 
         public async Task<IActionResult> Delete(long? id)
         {

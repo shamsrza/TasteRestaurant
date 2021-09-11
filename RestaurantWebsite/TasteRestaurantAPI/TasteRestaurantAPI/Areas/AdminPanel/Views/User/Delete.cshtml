@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Delete";
+    User user = Model;
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Delete user</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <address class="text-primary" style="display: flex">
+                            <div style="margin-right: 100px">
+                                <h5 class="font-weight-bold" style="color: black">
+                                    Username
+                                </h5>
+                                <p>
+                                    @user.Name
+                                </p>
+                            </div>
+                            <div>
+                                <h5 class="font-weight-bold" style="color: black">
+                                    Email
+                                </h5>
+                                <p>
+                                    @user.Email
+                                </p>
+                            </div>
+                        </address>
+                        <div style="display: flex">
+                            <form method="post"><button type="submit" class="btn btn-primary mr-2">Delete</button></form>
+                            <a class="btn btn-light" asp-action="Index">Cancel</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
